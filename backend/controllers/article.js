@@ -49,7 +49,7 @@ exports.modify = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     // db.Article.findOne({ where:{ id: req.params.id }})
         // .then(article => {
-            db.Article.delete({ id: req.params.id })
+            db.Article.destroy({ where:{ id: req.params.id  }})
             .then(() => res.status(200).json({ message: "Article supprimé"}))
             .catch( error => res.status(400).json({ error }))
         // })

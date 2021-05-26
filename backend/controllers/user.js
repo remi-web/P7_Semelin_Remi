@@ -23,7 +23,7 @@ exports.signup = async (req, res, next) =>{
 
 }
 
-exports.login = (req, res, next) =>{
+exports.login = (req, res, next) => {
     db.User.findOne({ where:{email: req.body.email}})
     .then(user => {
         if(!user){
@@ -47,6 +47,10 @@ exports.login = (req, res, next) =>{
     
     
     .catch(error => res.status(500).json({ error }))
+}
+
+exports.modify = (req, res) => {
+
 }
 
 

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
         models.Comment.belongsTo(models.Article, {
-            foreignKey: 'articles.id'
+            foreignKey: 'articleId'
         })
         
     }

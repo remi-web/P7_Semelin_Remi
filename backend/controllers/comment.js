@@ -17,10 +17,12 @@ exports.addComment = async (req, res, next) => {
 }
 
 exports.modifyComment = async (req, res) => {
-    db.Comment.findOne({ where:{ id: req.params.id }})
+    db.Comment.findOne({ 
+        where:{ id: req.params.id },
+        include: [{ model: db.articles }]
+    })
         .then(comment => {
             comment.update ({
-                articleId: req.params.id,
                 note: req.body.note
             })
             .then (() => res.status(200).json({ message: "Commentaire modifié"}))
@@ -28,4 +30,15 @@ exports.modifyComment = async (req, res) => {
     })
     .catch(error => res.status(404).json({ error }))
          
+}
+
+exports.delete = async (req, res) => {
+    db.Comment.destroy({
+        where: { id: req.params.id },
+        include: [{ model: db.articles }]
+    })
+        .then (() => res.status(200).json({ message: "Commentaire supprimé"}))
+        .catch( error => res.status(400).json({ error }))        
+    
+    .catch(error => res.status(404).json({ error }))
 }
