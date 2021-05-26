@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         models.Comment.belongsTo(models.Article, {
             foreignKey: 'articleId'
         })
-        
+        models.Comment.belongsTo(models.User,{
+            foreignKey: "userId"
+        })
     }
   };
   Comment.init({

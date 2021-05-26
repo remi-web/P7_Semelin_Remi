@@ -40,8 +40,8 @@ exports.modify = async (req, res, next) => {
                 title: req.body.title,
                 body: req.body.body
             })
-            .then(article => res.status(200).json({ message: "Article modifié"}))
-            .catch( error => res.status(400).json({ error }))
+                .then(article => res.status(200).json({ message: "Article modifié"}))
+                .catch( error => res.status(400).json({ error }))
         })
         .catch(error => res.status(404).json({ error }))
 }
