@@ -6,9 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Article extends Model {
     
     static associate(models) {
-      
-      models.Article.hasMany(models.Comment) 
-
+      models.Article.hasMany(models.Comment),
+      models.Article.hasMany(models.Reaction)
     }
   };
   Article.init({

@@ -20,7 +20,6 @@ exports.signup = async (req, res, next) => {
                 .catch(error => res.status (400).json({ error }))
         })
     .catch(error => res.status(500).json({ message: "problème" }))
-
 }
 
 exports.login = (req, res, next) => {
@@ -74,12 +73,11 @@ exports.modify = (req, res) => {
                 email: req.body.email,
                 lastName: req.body.nom,
                 pseudo: req.body.pseudo,
-                // password: req.body.password,
             })
             .then(() => res.status(200).json({ message: "Données utilisateur modifiées"}))
             .catch( error => res.status(400).json({ error }))
         })
-        .catch( error => res.status(404).json({ error }))
+    .catch( error => res.status(404).json({ error }))
 }
 
 

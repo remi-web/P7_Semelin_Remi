@@ -4,6 +4,8 @@ const path = require('path');
 const usersRoutes = require('./routes/user');
 
 const articlesRoutes = require('./routes/article')
+const commentsRoutes = require('./routes/comments')
+const reactionsRoutes = require('./routes/reaction')
 
 const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
@@ -36,5 +38,7 @@ try {
 
 app.use('/api/auth', usersRoutes);
 app.use('/api/articles', articlesRoutes)
+app.use('/api/articles', commentsRoutes)
+app.use('/api/articles', reactionsRoutes)
 
 module.exports = app;

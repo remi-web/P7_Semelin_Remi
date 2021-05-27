@@ -2,9 +2,6 @@ const { Sequelize, json } = require('sequelize');
 const db = require("../models/index");
 const jwt = require ('jsonwebtoken')
 
-
-
-
 exports.addComment = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
