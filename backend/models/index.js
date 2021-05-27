@@ -37,6 +37,7 @@ db.Sequelize = Sequelize;
 db.articles = require('./article')(sequelize, Sequelize)
 db.comments = require('./comment')(sequelize, Sequelize)
 db.users = require('./user')(sequelize, Sequelize)
+db.roles = require ('./role')(sequelize, Sequelize)
 
 console.log(db.comments)
 
@@ -49,6 +50,7 @@ db.articles.hasMany(db.comments, {
 db.users.hasMany(db.comments, {
   foreignKey: 'userId',
 })
+
 
 
 module.exports = db;
