@@ -1,8 +1,9 @@
 const db = require("../models/index");
 const jwt = require ('jsonwebtoken');
+const { sequelize } = require("../models/index");
 
 
-exports.create = async (req, res, next) => {
+exports.create = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     const article = ({
@@ -17,9 +18,9 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async(req, res) => {
     db.Article.findAll ({
-        attributes: [ 'body', 'id'],
+        attributes: [ 'body', 'id', 'userId'],
         include: [
-            { model: db.comments, attributes: [ 'note'] },
+            { model: db.comments, attributes: ['id', 'note', 'userId'] },
             { model: db.reactions, attributes: [ 'reactionTypeId'] }
         ]
     })
@@ -37,6 +38,7 @@ exports.findOne = async(req, res) => {
         ]
     })
         .then(article => res.status(200).json({ article }))
+        
         .catch(error => res.status(404).json({ error }))
 }
 
@@ -54,8 +56,13 @@ exports.modify = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
-    db.Article.destroy({ where:{ id: req.params.id  }})
-        .then(() => res.status(200).json({ message: "Article supprimé"}))
-        .catch( error => res.status(400).json({ error }))
+   sequelize.query(
+       `DELETE articles FROM articles
+        INNER JOIN comments ON comments.articleId = articles.id
+        INNER JOIN reations ON reactions.articleId = article.id
+        WHERE articles.id = ${req.params.id}`
+    )
+    .then(() => res.status(200).json({ message: "Article supprimé"}))
+    .catch( error => res.status(400).json({ error }))
 }
 

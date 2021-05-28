@@ -1,8 +1,6 @@
 const db = require("../../models/index");
 const jwt = require('jsonwebtoken');
 
-// Authentification pour supprimer ou modifier
-
 module.exports = async ( req, res, next) => {
 
     try {  

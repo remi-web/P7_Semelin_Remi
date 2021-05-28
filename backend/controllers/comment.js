@@ -29,10 +29,10 @@ exports.modifyComment = async (req, res) => {
     .catch(error => res.status(404).json({ error }))
 }
 
-exports.delete = async (req, res) => {
+exports.deleteComment = async (req, res) => {
     db.Comment.destroy({
         where: { id: req.params.id },
-        include: [{ model: db.articles }]
+        // include: [{ model: db.articles }]
     })
         .then (() => res.status(200).json({ message: "Commentaire supprimé"}))
         .catch( error => res.status(400).json({ error }))        

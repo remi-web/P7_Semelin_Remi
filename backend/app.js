@@ -29,12 +29,13 @@ const sequelize = new Sequelize("Groupomania", "root", "remix4226", {
 try {
   sequelize.authenticate();
   console.log('Connecté à la base de données MySQL!');
-  // sequelize.query("select * from users").then(([results, metadata]) => {
-      // console.log(results);
-    // })  
-} catch (error) {
+ 
+} 
+catch (error) {
   console.error('Impossible de se connecter, erreur suivante :', error);
 }
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/auth', usersRoutes);
 app.use('/api/articles', articlesRoutes)

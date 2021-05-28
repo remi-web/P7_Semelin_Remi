@@ -10,7 +10,9 @@ module.exports = async ( req, res, next) => {
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         const userId = decodedToken.userId;
 
-        db.Article.findAll({ where:{ id: req.params.id }})  
+        db.Article.findAll({ 
+            where:{ id: req.params.id }
+        })  
             .then(article => {
                 if (article[0].userId != userId) {   
                     res.status(401).send({ error: 'Acces non authorisé' });

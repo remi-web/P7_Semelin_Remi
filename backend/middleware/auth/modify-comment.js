@@ -1,4 +1,3 @@
-// const { Sequelize, json } = require('sequelize');
 const db = require("../../models/index");
 const jwt = require('jsonwebtoken');
 
@@ -13,9 +12,10 @@ module.exports = async ( req, res, next) => {
 
         db.Comment.findAll({ 
             where:{ id: req.params.id },
-            include: [{ model: db.users }]
+            // include: [{ model: db.users }]
         })
             .then(comment => {
+                console.log(comment)
                 if (comment[0].userId != userId) {   
                     res.status(401).send({ error: 'Acces non authorisé' });
                 }
@@ -23,7 +23,7 @@ module.exports = async ( req, res, next) => {
                     next ()
                 }
             })
-            .catch(error => res.status(404).json({ error: "Commentaire introuvable" }));
+        .catch(error => res.status(404).json({ error: "Commentaire introuvable" }));
     }
     catch {
         res.status(400).json({ message: "Requete invalide"})
