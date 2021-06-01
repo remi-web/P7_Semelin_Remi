@@ -1,6 +1,8 @@
 const db = require("../models/index");
 const jwt = require ('jsonwebtoken');
-const { sequelize } = require("../models/index");
+const { sequelize } = require("../models/index")
+const fs = require('fs')
+
 
 
 exports.create = async (req, res) => {
@@ -10,6 +12,8 @@ exports.create = async (req, res) => {
         body: req.body.body,
         userId: decodedToken.userId,
         title: req.body.title,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+
     });
     db.Article.create (article)
         .then( article => res.status(201).json({message: "article enregistré"}))
@@ -18,7 +22,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async(req, res) => {
     db.Article.findAll ({
-        attributes: [ 'body', 'id', 'userId'],
+        attributes: [ 'body', 'id', 'userId', 'imageUrl'],
         include: [
             { model: db.comments, attributes: ['id', 'note', 'userId'] },
             { model: db.reactions, attributes: [ 'reactionTypeId'] }
@@ -30,7 +34,7 @@ exports.findAll = async(req, res) => {
 
 exports.findOne = async(req, res) => {
     db.Article.findAll({
-        attributes:  [ 'body' ],
+        attributes:  [ 'body','id', 'userId', 'imageUrl' ],
         where:{ id: req.params.id },
         include: [
             { model: db.comments, attributes: [ 'note'] },
@@ -43,11 +47,14 @@ exports.findOne = async(req, res) => {
 }
 
 exports.modify = async (req, res, next) => {
+
     db.Article.findOne({ where:{ id: req.params.id }})
         .then(article => {
             article.update({
                 title: req.body.title,
-                body: req.body.body
+                body: req.body.body,
+                imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+
             })
                 .then(article => res.status(200).json({ message: "Article modifié"}))
                 .catch( error => res.status(400).json({ error }))
@@ -56,13 +63,31 @@ exports.modify = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
-   sequelize.query(
-       `DELETE articles FROM articles
-        INNER JOIN comments ON comments.articleId = articles.id
-        INNER JOIN reations ON reactions.articleId = article.id
-        WHERE articles.id = ${req.params.id}`
-    )
-    .then(() => res.status(200).json({ message: "Article supprimé"}))
+    db.Article.findOne({
+        where:{ id: req.params.id },
+    })
+    .then(article => {
+
+        sequelize.query(`
+            DELETE articles FROM articles
+            WHERE articles.id = ${req.params.id}`
+        )
+        
+        if( article.imageUrl != null){
+            const filename = article.imageUrl.split('/images/')[1]
+            console.log(filename)
+            fs.unlink(`images/${filename}`, () => {
+            })
+        }
+        res.status(201).json({ message: "article supprimé"})
+        
+    })
     .catch( error => res.status(400).json({ error }))
 }
 
+/*
+.then(article => {
+    if( article.imageUrl != null){
+        const filename = article.imageUrl.split('/images/')[1]
+        fs.unlink(`images/${filename}`, () => 
+        */

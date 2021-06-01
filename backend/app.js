@@ -7,9 +7,9 @@ const articlesRoutes = require('./routes/article')
 const commentsRoutes = require('./routes/comments')
 const reactionsRoutes = require('./routes/reaction')
 
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
-const db = require('./models');
+// const db = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
