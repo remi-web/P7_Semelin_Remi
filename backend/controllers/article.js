@@ -67,12 +67,13 @@ exports.delete = async (req, res, next) => {
         where:{ id: req.params.id },
     })
     .then(article => {
-
+        article.destroy()
+        /*
         sequelize.query(`
             DELETE articles FROM articles
             WHERE articles.id = ${req.params.id}`
         )
-        
+        */        
         if( article.imageUrl != null){
             const filename = article.imageUrl.split('/images/')[1]
             console.log(filename)
@@ -85,9 +86,3 @@ exports.delete = async (req, res, next) => {
     .catch( error => res.status(400).json({ error }))
 }
 
-/*
-.then(article => {
-    if( article.imageUrl != null){
-        const filename = article.imageUrl.split('/images/')[1]
-        fs.unlink(`images/${filename}`, () => 
-        */

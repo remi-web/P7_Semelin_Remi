@@ -8,7 +8,7 @@ const auth = require('../middleware/auth/auth')
 const authModifyArticle = require('../middleware/auth/modify-article')
 const authDeleteArticle = require('../middleware/auth/delete-article')
 const article = require('../controllers/article')
-const joinToDelete = require('../middleware/delete/join')
+const joinToDelete = require('../middleware/join/join')
 
 router.post ('/', auth, multer, article.create);
 router.get('/', auth, article.findAll);
