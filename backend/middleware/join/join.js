@@ -12,7 +12,6 @@ module.exports = async (req, res, next) => {
             ]
         })
         .then(article => {
-            console.log(article[0].Comments[0])
 
             if( article[0].Comments[0] !== undefined) {
                 sequelize.query(`

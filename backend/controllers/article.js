@@ -12,7 +12,7 @@ exports.create = async (req, res) => {
         body: req.body.body,
         userId: decodedToken.userId,
         title: req.body.title,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 
     });
     db.Article.create (article)

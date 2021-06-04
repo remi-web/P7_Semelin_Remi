@@ -7,6 +7,8 @@ const articlesRoutes = require('./routes/article')
 const commentsRoutes = require('./routes/comments')
 const reactionsRoutes = require('./routes/reaction')
 
+const helmet = require("helmet")
+
 // const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
 // const db = require('./models');
@@ -34,6 +36,8 @@ try {
 catch (error) {
   console.error('Impossible de se connecter, erreur suivante :', error);
 }
+
+app.use(helmet())
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

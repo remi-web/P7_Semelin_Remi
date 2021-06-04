@@ -11,7 +11,7 @@ const article = require('../controllers/article')
 const joinToDelete = require('../middleware/join/join')
 
 router.post ('/', auth, multer, article.create);
-router.get('/', auth, article.findAll);
+router.get('/',  article.findAll);
 router.get('/:id', auth, article.findOne);
 router.put('/:id', authModifyArticle, multer, article.modify);
 router.delete('/:id', authDeleteArticle, joinToDelete, article.delete);
