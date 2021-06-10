@@ -8,9 +8,9 @@ exports.signup = async (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             const user = ({
-                firstName: req.body.prenom,
+                firstName: req.body.firstName,
                 email: req.body.email,
-                lastName: req.body.nom,
+                lastName: req.body.lastName,
                 pseudo: req.body.pseudo,
                 password: hash,
                 roleId: 1
@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
     .catch(error => res.status(500).json({ message: "problème" }))
 }
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     db.User.findOne({ where:{email: req.body.email}})
     .then(user => {
         if(!user){

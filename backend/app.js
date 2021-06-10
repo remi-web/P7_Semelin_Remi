@@ -7,6 +7,9 @@ const articlesRoutes = require('./routes/article')
 const commentsRoutes = require('./routes/comments')
 const reactionsRoutes = require('./routes/reaction')
 
+require ('dotenv').config();
+
+
 const helmet = require("helmet")
 
 // const mysql = require('mysql2');
@@ -22,12 +25,17 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
 const sequelize = new Sequelize("Groupomania", "root", "remix4226", {
   dialect: "mysql",
   host: "localhost"
 });
 
+/*
+const sequelize = new Sequelize(`${process.env.DB_DATABASE}, ${process.env.DB_USER}, ${process.env.DB_PASSWORD}`, {
+  dialect: "mysql",
+  host: "localhost"
+});
+*/
 try {
   sequelize.authenticate();
   console.log('Connecté à la base de données MySQL!');

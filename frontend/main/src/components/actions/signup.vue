@@ -1,0 +1,90 @@
+<template>
+    <div id="formSignup">
+        <form id="form" action="signup" method="post"><p>Inscription</p>
+        <main>
+                <div class="input">
+                    <label for="name"></label>
+                    <input id="last-name" type="text" name="last-name" placeholder="Nom" v-model="lastName">
+                </div>
+                <div class="input">
+                    <label for="name"></label>
+                    <input type="text" id="first-name" name="first-name" placeholder="Prenom" v-model="firstName">
+                </div>
+                <div class="input">
+                    <label for="mail"></label>
+                    <input type="email" class="email" name="email" placeholder="e-mail" v-model="email">
+                </div>
+                <div class="input">
+                    <label for="name"></label>
+                    <input type="text" id="pseudo" name="pseudo" placeholder="pseudo" v-model="pseudo">
+                </div>
+                <div class="input">
+                    <label for="name"></label>
+                    <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
+                </div>
+                <button id="signup-button" @click="signup">SIGNUP</button>
+        </main>
+
+        </form>
+    </div>
+</template>
+
+<script>
+const axios= require ('axios');
+
+export default {
+
+    name:"signup",
+
+    data:() => ({
+        firstName:"",
+        lastName:"",
+        email:"",
+        pseudo:"",
+        password:""
+        
+    }),
+
+    methods: {
+        signup(){
+            axios.post('http://localhost:3000/api/auth/signup',{
+                email: this.email,
+                firstName: this.firstName,
+                lastName: this.lastName,
+                pseudo: this.pseudo,
+                password: this.password
+            })
+            .then((res) => {
+                console.log(res)
+            })
+        }
+    }
+}
+</script>
+
+<style>
+
+
+    #formSignup {
+        border: solid;
+        width: 50%;
+        margin-bottom: 10%;
+        margin-top: 10%;
+        display: flex;
+        justify-content: center;
+        
+        
+    };
+    main .input #last-name{
+            margin: 5%;
+    }
+
+    main{
+        margin-bottom: 10%;
+    }
+    #signup-button{
+        margin: 5%;
+        width: 100%;
+    }
+
+</style>

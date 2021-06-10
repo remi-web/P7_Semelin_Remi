@@ -1,28 +1,39 @@
 <template>
      <div>
       <div> 
-           <p class="comment">{{ note }}</p>
-       
-        
+            <p class="comment">{{ note }}    </p>
+            <deleteComment :id=this.id></deleteComment>
+            <modifyComment :id=this.id></modifyComment>
       </div>
     </div> 
 </template>
 
 <script>
+import deleteComment from '../components/actions/delete-comment'
+import modifyComment from '../components/actions/modify-comment'
+
     export default {
         name: "Comment",
+        components:{
+            deleteComment, modifyComment
+        },
 
         props:{
 
             note:{
                 type: String,
-                default:""
+                default: ""
             },
-            
+            id:{
+                type: Number
+            },
+            userId:{
+                type: Number
+            },
+            articleId:{
+                type: Number
+            }
         }, 
-        template: 
-            '<p>{{ note }}</p>'
-        
     }
 </script>
 

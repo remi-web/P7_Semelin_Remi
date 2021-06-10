@@ -4,68 +4,65 @@
       <!-- <button @click="getArticles">CLICK</button> -->
       <Baner/>
         HOME
-      <Articl
-         
-          v-for="(article, index) in articles" :key="index"
+        <addArticle></addArticle>
+
+      <post
+      
+          v-for="article in articles" :key="article.id"
           :body="article.body"
           :imageUrl="article.imageUrl"
           :Reactions="article.Reactions"
           :Comments="article.Comments"
+          :id="article.id"
+          :userId="article.userId"
+          :pseudo="article.User.pseudo"
           
-            >
-          <template
           >
 
-            
-              
+        </post>
+        <!-- <signup/> -->
 
-            
-            
-          </template>
-        
-      </Articl>
-     <!-- {{ articles.data.articles[0].body }} -->
+      <!-- <login/> -->
+      
    </div>
 </template>
 
 <script>
-import Baner from '../components/baner.vue'
-import Articl from '../components/articl'
-// let api = require('../services/api')
-
-const axios= require ('axios');
+import Baner from '../components/baner'
+import post from '../components/post'
+// import signup from '../components/actions/signup'
+// import login from '../components/actions/login'
+import addArticle from '../components/actions/add-article'
+const axios = require ('axios');
 
 export default {
     name: 'Home',
     components: {
-        Baner, Articl,
-        
+        Baner, post, addArticle,
     },
 
     data:() => ({
-      
-        articles: "",
-      
+        articles: [],
     }),
-async created() {
-  
-    await axios.get('http://localhost:3000/api/articles', {
-    // headers: {
-        // 'authorization': 'bearer ' + localStorage.getItem('token')
-            })
-    .then((response) => {
-        
-         this.articles = response.data.articles;
-         this.comments = response.data.articles.Comments
-    })
-},
-    
-        
-      
-    
-}
-  
 
-    
+    methods:{
+            sendArticleId(){
+            this.$emit('sent-id',{
+                articleId : this.id
+            })
+            }
+        },
+
+    async created() {
+        await axios.get('http://localhost:3000/api/articles', {
+            headers: {
+                'authorization': 'bearer ' + localStorage.getItem('token')
+            }
+        })
+        .then((response) => {
+            this.articles = response.data.articles;
+        })
+    },    
+}
 </script>
 

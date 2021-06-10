@@ -21,8 +21,7 @@
             },
             
         }, 
-        template: 
-            '<p>{{ reaction }}</p>'
+     
         
     }
 </script>

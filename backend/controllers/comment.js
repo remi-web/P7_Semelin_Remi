@@ -2,14 +2,16 @@ const { Sequelize, json } = require('sequelize');
 const db = require("../models/index");
 const jwt = require ('jsonwebtoken')
 
-exports.addComment = async (req, res, next) => {
+exports.addComment = async (req, res, ) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     const comment = ({
+        note: req.body.note,
         articleId: req.params.id,
         userId: decodedToken.userId,
-        note: req.body.note
+        
     });
+    console.log(comment)
     db.Comment.create (comment)
         .then(comment => res.status(201).json({ message: "Commentaire ajouté"}))
         .catch(error => res.status(400).json({ error }))

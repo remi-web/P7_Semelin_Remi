@@ -13,7 +13,7 @@
         name: "baner",
 
         data:() => ({
-            message: "coucou lees gens",
+            message: "coucou les gens",
             // active: true
         }),
     }
