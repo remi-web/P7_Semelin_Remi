@@ -25,15 +25,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Profil.vue')
 
   },
-  {
-    path:'/connexion',
-    name:'/Connexion',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Connexion.vue')
-
-  },
+  
 ]
 
 const router = new VueRouter({
+  // mode: history,
   routes
 })
 

@@ -1,6 +1,6 @@
 <template>
     <div id="logout">
-        <button id="logout-button" >se déconnecter</button>
+        <button @click="logout" id="logout-button" >se déconnecter</button>
     </div>
 </template>
 
@@ -10,10 +10,16 @@ export default {
     name:"logout",
 
     methods: {
-        // logout(){
-            // localStorage.removeItem('token')
-            // window.alert('vous etes déconnecté')
-        // }
+        logout(){
+            window.confirm('voulez vous vous déconnecter ?');{
+                if(confirm){
+                    localStorage.removeItem('token', 'userId')
+                    this.$router.push('acceuil')
+                }
+            
+            
+            }
+        }
     }
 }
 

@@ -1,10 +1,13 @@
 <script src="http://localhost:8098"></script>
 <template>
    <div class="home" >
-      <!-- <button @click="getArticles">CLICK</button> -->
       <Baner/>
         HOME
-        <addArticle></addArticle>
+        <logout/>
+        <template v-if="connect">
+            <addArticle></addArticle>
+        </template>
+       
 
       <post
       
@@ -19,50 +22,52 @@
           
           >
 
-        </post>
-        <!-- <signup/> -->
-
-      <!-- <login/> -->
-      
+        </post>      
    </div>
 </template>
 
 <script>
 import Baner from '../components/baner'
 import post from '../components/post'
-// import signup from '../components/actions/signup'
-// import login from '../components/actions/login'
 import addArticle from '../components/actions/add-article'
+import logout from '../components/actions/logout.vue';
+
+
 const axios = require ('axios');
 
 export default {
     name: 'Home',
     components: {
         Baner, post, addArticle,
+        logout, 
     },
 
     data:() => ({
         articles: [],
+        connect: false,
+        revele: true,
+        login: false     
     }),
 
     methods:{
-            sendArticleId(){
-            this.$emit('sent-id',{
-                articleId : this.id
-            })
-            }
+        async getArticles() {
+                await axios.get('http://localhost:3000/api/articles', {
+                    headers: {
+                        'authorization': 'bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then((response) => {
+                    this.articles = response.data.articles;
+                    this.connect = true
+                })
         },
-
-    async created() {
-        await axios.get('http://localhost:3000/api/articles', {
-            headers: {
-                'authorization': 'bearer ' + localStorage.getItem('token')
-            }
-        })
-        .then((response) => {
-            this.articles = response.data.articles;
-        })
-    },    
+    },
+    beforeMount(){
+        if(localStorage.token){
+            this.revele = false
+            this.getArticles()
+        }
+    }
 }
 </script>
 
