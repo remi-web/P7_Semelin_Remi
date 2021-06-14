@@ -19,7 +19,20 @@ exports.create = async (req, res) => {
     }); 
     console.log(article)
     db.Article.create (article)
-        .then( article => res.status(201).json({message: "article enregistré"}))
+    
+        .then( article => {
+            db.Article.findAll({
+                attributes:  [ 'body','id', 'userId', 'imageUrl' ],
+                where:{ id: article.id },
+                include: [
+                    { model: db.comments, attributes: [ 'note'] },
+                    { model: db.reactions, attributes: [ 'reactionTypeId']},
+                    { model: db.users, attributes: [ 'pseudo']}
+                ]
+            })
+                .then(article => res.status(200).json({ article }))                    
+                .catch(error => res.status(404).json({ error }))
+        })
         .catch(error => res.status (400).json((error)))
 }
 

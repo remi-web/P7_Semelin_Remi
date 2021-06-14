@@ -23,21 +23,22 @@ const axios= require ('axios');
         methods:{
             
             sendArticle(){
-                const formData = new FormData()
-                formData.append('body', this.body)
-                // formData.append('userId', parseInt(localStorage.getItem('userId')))
-                
-                axios.post ('http://localhost:3000/api/articles', formData, {
+
+                axios.post ('http://localhost:3000/api/articles',
+                    { body: this.body},
+                    {
                     headers:{
-                        'Content-Type':'multipart/form-data',
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     },
                 })
-                .then((res) => {
-                    if(res){
-                        document.location.reload()
+                
+                .then((response) => {
+                    console.log(response.data.article[0].User.pseudo)
+                    if(response){
+                       this.$emit("added", {
+                           article: response.data.article[0]
+                        }) 
                     }
-                    console.log(res)
                 })
             }
         }

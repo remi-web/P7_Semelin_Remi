@@ -3,9 +3,11 @@
    <div class="home" >
       <Baner/>
         HOME
-        <logout/>
+        <button @click="displayLogout()" id="logout-button">Se déconnecter</button>
+        <modale id="modale" :reveal="reveal" :logout="logout"></modale>
+
         <template v-if="connect">
-            <addArticle></addArticle>
+            <addArticle @added="add"></addArticle>
         </template>
        
 
@@ -30,7 +32,7 @@
 import Baner from '../components/baner'
 import post from '../components/post'
 import addArticle from '../components/actions/add-article'
-import logout from '../components/actions/logout.vue';
+import modale from '../components/modale'
 
 
 const axios = require ('axios');
@@ -38,15 +40,16 @@ const axios = require ('axios');
 export default {
     name: 'Home',
     components: {
-        Baner, post, addArticle,
-        logout, 
+        Baner, post, addArticle, modale
     },
 
     data:() => ({
         articles: [],
         connect: false,
-        revele: true,
-        login: false     
+        reveal: false,
+        login: false,
+        reveal: false,
+        logout: false
     }),
 
     methods:{
@@ -61,10 +64,21 @@ export default {
                     this.connect = true
                 })
         },
+        add(payload){
+            console.log(payload.article)
+            this.articles.push(payload.article)
+            this.getArticles()
+        },
+
+        displayLogout(){
+            this.reveal = true
+            this.logout = true
+        }
+        
     },
     beforeMount(){
         if(localStorage.token){
-            this.revele = false
+            this.reveal = false
             this.getArticles()
         }
     }

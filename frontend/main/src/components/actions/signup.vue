@@ -1,14 +1,14 @@
 <template>
     <div id="formSignup">
-        <form id="form" action="signup" method="post"><p>Inscription</p>
+        <form id="form" action="signup" method="post">
         <main>
                 <div class="input">
                     <label for="name"></label>
-                    <input id="last-name" type="text" name="last-name" placeholder="Nom" v-model="lastName">
+                    <input id="last-name" type="text" name="lastName" placeholder="Nom" v-model="lastName">
                 </div>
                 <div class="input">
                     <label for="name"></label>
-                    <input type="text" id="first-name" name="first-name" placeholder="Prenom" v-model="firstName">
+                    <input type="text" id="first-name" name="firstName" placeholder="Prenom" v-model="firstName">
                 </div>
                 <div class="input">
                     <label for="mail"></label>
@@ -52,11 +52,15 @@ export default {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 pseudo: this.pseudo,
-                password: this.password
+                password: this.password,
+                roleId: 1
             })
             .then((res) => {
                 console.log(res)
+                this.$router.push('Messagerie')
             })
+            .catch(() => console.log("erreur inscription"))
+
         }
     }
 }
@@ -66,7 +70,6 @@ export default {
 
 
     #formSignup {
-        border: solid;
         width: 50%;
         margin-bottom: 10%;
         margin-top: 10%;

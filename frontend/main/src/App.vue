@@ -8,33 +8,30 @@
             <!-- <router-link class="baner-txt" to="/connexion">connexion</router-link> -->
         </div> 
     <!-- <Home/> -->
-      <acceuil id="acceuil" :isConnected=this.isConnected v-if="!connected"></acceuil>
+      <connexion id="acceuil"  v-if="!isConnected"></connexion>
     
     <router-view/>
   </div>
 </template>
 
 <script>
- import logout from './components/actions/logout'
- import acceuil from './views/acceuil'
+ import connexion from './views/connexion'
 
 
 
 export default {
   name: 'App',
   components: {
-    logout, acceuil,
+     connexion,
   },
 
-  data: () => ({
-    connected: true
-  }),
 
-  methods: {
+  computed: {
        isConnected(){
-            if(!localStorage.token){
-                this.connected = false
+            if(localStorage.token){
+                return true
             }
+            return false
         }
   }
 }

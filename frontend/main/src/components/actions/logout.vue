@@ -1,24 +1,26 @@
 <template>
     <div id="logout">
-        <button @click="logout" id="logout-button" >se déconnecter</button>
+        <p>Etes vous sur de vouloir vous déconnecter ?</p>
+        <button @click="logout()" class="button">OUI</button>
     </div>
 </template>
 
 <script>
 
 export default {
-    name:"logout",
+    name: "logout",
+    components:{
+        
+    },
+
+    data: () =>({
+        reveal: false
+    }),
 
     methods: {
         logout(){
-            window.confirm('voulez vous vous déconnecter ?');{
-                if(confirm){
-                    localStorage.removeItem('token', 'userId')
-                    this.$router.push('acceuil')
-                }
-            
-            
-            }
+            localStorage.removeItem('token')
+            this.$router.push('connexion')
         }
     }
 }

@@ -13,7 +13,7 @@
                 
             </div>
         </form>
-        <button @click="hideModale(); login()">LOG</button>
+        <button id="login-button" @click=" login()">LOGIN</button>
         
     </div>
     
@@ -34,13 +34,10 @@ export default {
         password:"",
         hide: true
     }),
-
+/*
     props:
         ['hideModale'],
-    
-
-
-
+  */      
     methods: {
         login(){
             axios.post ('http://localhost:3000/api/auth/login', {
@@ -61,5 +58,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+    #login-button{
+        width: 100%;
+    }
+
+</style>
 
 

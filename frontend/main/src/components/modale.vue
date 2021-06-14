@@ -3,7 +3,17 @@
         <div class="overlay" @click="hideModale"></div>
         <div class="modale cart">
             <div class="button">X</div>
-            <login :hideModale="hideModale"></login>
+
+            <div v-if="logout">  
+                <logout></logout>
+            </div>
+            <div v-else-if="login">
+                <login></login>
+            </div>
+            <div v-else-if="signup">  
+                <signup></signup>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -11,14 +21,18 @@
 <script>
 
 import login from '../components/actions/login'
+import signup from '../components/actions/signup'
+import logout from '../components/actions/logout'
+
 
 export default {
     name: "modale",
     components: {
-        login
+        login, signup, logout
     },
 
     props:{
+        
         reveal: {
             type: Boolean,
             default: false
@@ -26,14 +40,27 @@ export default {
         hide:{
             type: Boolean,
             default: false
+        },
+        login:{
+            type: Boolean,
+            default: false
+        },
+        logout:{
+            type: Boolean,
+            default: false
+        },
+        signup:{
+            type: Boolean,
+            default: false
         }
+               
       
     },
 
     methods:{
         hideModale(){
-            this.reveal = !this.reveal
-        }
+            this.reveal = false
+        },
     }
 
     
