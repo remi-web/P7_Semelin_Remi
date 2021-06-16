@@ -17,8 +17,6 @@
 <script>
  import connexion from './views/connexion'
 
-
-
 export default {
   name: 'App',
   components: {
@@ -60,6 +58,7 @@ export default {
     padding: 2%;
 
   }
+
   #nav a.router-link-exact-active {
   color: #20355F;
   text-decoration: underline;

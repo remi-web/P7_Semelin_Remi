@@ -25,7 +25,7 @@ exports.create = async (req, res) => {
                 attributes:  [ 'body','id', 'userId', 'imageUrl' ],
                 where:{ id: article.id },
                 include: [
-                    { model: db.comments, attributes: [ 'note', 'pseudo'] },
+                    { model: db.comments, attributes: [ 'note'] },
                     { model: db.reactions, attributes: [ 'reactionTypeId']},
                     { model: db.users, attributes: [ 'pseudo']}
                 ]

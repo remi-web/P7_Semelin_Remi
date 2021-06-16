@@ -15,9 +15,6 @@
 
 <script>
 import deleteArticle from './actions/delete-article'
-// import modifyArticle from './actions/modify-article'
-
-
 
 export default {
     name: "scrollMenu",

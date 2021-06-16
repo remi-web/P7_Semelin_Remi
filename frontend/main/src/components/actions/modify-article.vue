@@ -1,10 +1,7 @@
 <template>
     <div id="add-comment">
-            
-                <textarea name="text-input" id="comment-text-area" cols="30" rows="2" v-model="body"></textarea>
-                <button id="button-send"  @click="modifyArticle">SEND</button>
-            
-        
+        <textarea name="text-input" id="comment-text-area" cols="30" rows="20" v-model="body"></textarea>
+        <button class="confirm-button send-button"  @click="modifyArticle()">SEND</button>        
     </div>
 </template>
 
@@ -35,9 +32,16 @@ const axios= require ('axios');
                 axios.put ('http://localhost:3000/api/articles/'+ this.id+'',
                 { body: this.body,
                   title: "test" },
-                { headers: {
+                { headers: 
+                        {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
+                })
+                .then(() => {
+                    this.$emit('authorized')
+                })
+                .catch(() => {
+                    this.$emit('unauthorized')
                 })
             }
         },
@@ -45,8 +49,11 @@ const axios= require ('axios');
 </script>
 
 <style>
-  .button-modify{
-      font-size: 0.7em;
-      margin-bottom: 4%;
-  }
+    .button-modify{
+        font-size: 0.7em;
+        margin-bottom: 4%;
+    }
+    .send-button{
+        margin-top: 25%
+    }
 </style>

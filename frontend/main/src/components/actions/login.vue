@@ -35,9 +35,8 @@ export default {
         hide: true
     }),
 
- 
-       
     methods: {
+
         login(){
             axios.post ('http://localhost:3000/api/auth/login', {
                     email: this.email,
@@ -49,6 +48,7 @@ export default {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('userId', res.data.userId)
                 this.$router.push('home')
+                this.$emit('connected')
                 }
             })
             

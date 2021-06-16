@@ -1,20 +1,27 @@
 <template>
     <div >
         
-        <main id= "posts" >
+        <main id= "posts" >{{ id }}
+            
             <p class="pseudo">{{ pseudo }}</p>
             <button  @click="scrollMenu()" class="user-post-access">...</button>
-            <div id="modify-section" v-if="revealScrollMenu">
 
+            <div id="modify-section" v-if="revealScrollMenu">
                 <button class="button" @click="displayModaleModify()">modifier</button>
-                <button class="button" @click="displayModaleDelete()">supprimer</button>
-                <modale :reveal="this.reveal" :modifyArticle="this.modifyArticle" :deleteArticle="this.deleteArticle"
-                    @unreveal="hideModale()"></modale>
-                
+                <button class="button" @click="displayModaleDelete()">supprimer</button>                
             </div>
+
+            <modale 
+                :reveal="this.reveal" 
+                :modifyArticle="this.modifyArticle" 
+                :deleteArticle="this.deleteArticle"
+                :id="this.id"
+                @unreveal="hideModale()"
+                @undisplay="undisplay()">
+            </modale>
+
             <article class="article"> {{ body }}
-                
-                
+
                 <reaction
                     v-for="(reaction, i) in Reactions" :key="i"
                     :reaction="reaction.reaction">
@@ -34,20 +41,16 @@
 </template>
 
 <script>
-// const axios= require ('axios')
 
 import commentaire from '../components/comment'
 import reaction from './reaction.vue'
 import addComment from '../components/actions/add-comment'
-// import modaleDelete from '../components/modales/m-delete-article'
-// import modaleModify from '../components/modales/m-modify-article'
 import modale from '../components/modale'
 
     export default {
         name: "post",
         components: {
             commentaire, reaction, addComment, modale,
-            //  modaleDelete, modaleModify
         },
         
         data:() => ({
@@ -86,10 +89,6 @@ import modale from '../components/modale'
                 type: String,
                 default: ""
             },
-            hideScrollMenu:{
-                type: Boolean,
-                default: false
-            }
         },
         methods: {
             scrollMenu(){
@@ -110,7 +109,11 @@ import modale from '../components/modale'
                 this.reveal = false
                 this.modifyArticle = false
                 this.deleteArticle = false
+            },
+            undisplay(){
+                this.modifyArticle = false
             }
+
         }
     }
 </script>

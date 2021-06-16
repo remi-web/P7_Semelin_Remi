@@ -7,17 +7,37 @@
             <div v-if="login">
                 <login></login>
             </div>
+
             <div v-else-if="signup">  
                 <signup></signup>
             </div>
+
             <div v-else-if="logout">  
                 <logout></logout>
             </div>
-            <div v-else-if="modifyArticle">
-                <modifyArticle></modifyArticle>
+
+            <div v-else-if="addArticle">
+                <addArticle></addArticle>
             </div>
+
+            <div v-else-if="modifyArticle">
+                <modifyArticle 
+                    :id="this.id"
+                    @unauthorized="unauthorized()"
+                    @authorized="authorized()">
+                </modifyArticle>
+            </div>
+            <div v-else-if="displayMessage">
+                    {{ message }}
+                    <button class="confirm-button" @click="hideModale()">OK</button>
+            </div>
+
             <div v-else-if="deleteArticle=true">
-               <deleteArticle></deleteArticle>
+                <deleteArticle 
+                    :id="this.id"
+                    @unauthorized="unauthorized()"
+                    @authorized="authorized()">
+            </deleteArticle>
             </div>
            
             
@@ -30,6 +50,7 @@
 import login from '../components/actions/login'
 import signup from '../components/actions/signup'
 import logout from '../components/actions/logout'
+import addArticle from '../components/actions/add-article'
 import modifyArticle from './actions/modify-article'
 import deleteArticle from './actions/delete-article'
 
@@ -38,11 +59,14 @@ import deleteArticle from './actions/delete-article'
 export default {
     name: "modale",
     components: {
-        login, signup, logout, modifyArticle, deleteArticle
+        login, signup, logout, addArticle, modifyArticle, deleteArticle
     },
 
     data: () => ({
         delete: true,
+        message: "",
+        displayMessage: false
+        
     }),
 
     props:{
@@ -63,35 +87,50 @@ export default {
             type: Boolean,
             default: false
         },
+        addArticle:{
+            type: Boolean,
+            default: false
+        },
         modifyArticle:{
             type: Boolean,
             default: false
         },
-        
-        deleteArticle:{
-            type: Boolean,
-            default: false
-        },
-        /*
-        showModifyArticle:{
-            type: Function,
-        }
-          */     
-      
+        id:{
+            type: Number
+        }   
     },
 
     methods:{
+        
         hideModale(){
-            return this.$emit('unreveal')
+            this.$emit('unreveal')
         },
-    }
 
-    
-    
+        unauthorized(){
+            this.message = "Accès non authorisé"
+            this.$emit('undisplay')
+            this.displayMessage = true
+        },
+
+        authorized(){
+            if(this.modifyArticle){
+                this.message = "Article modifé"
+            }
+            else if(this.deleteArticle){
+                this.message = "Article supprimé"
+            }
+            this.$emit('undisplay')
+            this.displayMessage = true
+        },
+      
+        reload(){
+            document.location.reload()
+        }
+    }
 }
 </script>
 
-<style scoped>
+<style>
     .bloc-modale{
         position: fixed;
         top: 0%;
@@ -129,5 +168,10 @@ export default {
         border: none;
         border-radius: 15%;
         padding: 2%;
+    }
+    .confirm-button{
+        position: absolute;
+        left: 40%;
+        top: 70%;
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
    <div>
             <p>Etes vous sûr de vouloir supprimer cet article ?</p>
-            <button id="button-send"  @click="deleteArticle">DELETE</button>
+            <button class="confirm-button"  @click="deleteArticle">DELETE</button>
        
    </div>
 </template>
@@ -31,8 +31,11 @@ const axios= require ('axios');
                             { Authorization: 'Bearer ' + localStorage.getItem('token')},
                     }       
                 )
-                .then((res) => {
-                    console.log(res)
+                .then(() => {
+                    this.$emit('authorized')
+                })
+                .catch(() => {
+                    this.$emit('unauthorized')
                 })
             },
         }

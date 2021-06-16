@@ -2,7 +2,11 @@
     <div class="container">
         <button @click="displayLogin()" id="login-button">Connexion</button>ou
         <button @click="displaySignup()" id="signup-button">Inscription</button>
-        <modale id="modale" :reveal="reveal" :login="login" :signup="signup" ></modale>
+        <modale class="modale" 
+            :reveal="reveal" 
+            :login="login" 
+            :signup="signup" 
+            @unreveal="hideModale()"></modale>
     </div>
    
 </template>
@@ -24,6 +28,12 @@ export default {
 
     methods:{
         
+        hideModale(){
+            this.reveal = false
+            this.login = false
+            this.signup = false
+        },
+
         displayLogin(){
             this.reveal = !this.reveal
             this.login = true
