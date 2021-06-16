@@ -1,10 +1,10 @@
 <script src="http://localhost:8098"></script>
 <template>
-   <div class="home" >
+   <div id="home" >
       <Baner/>
-        HOME
-        <button @click="displayLogout()" id="logout-button">Se déconnecter</button>
-        <modale id="modale" :reveal="reveal" :logout="logout"></modale>
+
+        <!-- <button @click="displayLogout()" id="logout-button">Se déconnecter</button> -->
+        <!-- <modale id="modale" :reveal="reveal" :logout="logout"></modale> -->
 
         <template v-if="connect">
             <addArticle @added="add"></addArticle>
@@ -32,7 +32,7 @@
 import Baner from '../components/baner'
 import post from '../components/post'
 import addArticle from '../components/actions/add-article'
-import modale from '../components/modale'
+// import modale from '../components/modale'
 
 
 const axios = require ('axios');
@@ -40,13 +40,12 @@ const axios = require ('axios');
 export default {
     name: 'Home',
     components: {
-        Baner, post, addArticle, modale
+        Baner, post, addArticle, //modale
     },
 
     data:() => ({
         articles: [],
         connect: false,
-        reveal: false,
         login: false,
         reveal: false,
         logout: false
@@ -69,12 +68,12 @@ export default {
             this.articles.push(payload.article)
             this.getArticles()
         },
-
+    /*
         displayLogout(){
             this.reveal = true
             this.logout = true
         }
-        
+      */  
     },
     beforeMount(){
         if(localStorage.token){
@@ -84,4 +83,18 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+    #home{       
+        background-color: #f1f1f1;
+        margin-left: 20%;
+        margin-right: 20%;
+        border-radius: 8px;
+        z-index: -1;
+        box-shadow: 0px 4px 9px -3px grey;      
+
+    }
+
+</style>
 

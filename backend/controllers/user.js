@@ -19,7 +19,7 @@ exports.signup = async (req, res, next) => {
                 .then(user => res.status(201).json({message: "utilisateur créé"}))
                 .catch(error => res.status (400).json({ error }))
         })
-    .catch(error => res.status(500).json({ message: "problème" }))
+    .catch(error => res.status(500).json({ message: "signup error" }))
 }
 
 exports.login = (req, res) => {

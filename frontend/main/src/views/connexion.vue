@@ -25,12 +25,12 @@ export default {
     methods:{
         
         displayLogin(){
-            this.reveal = true
+            this.reveal = !this.reveal
             this.login = true
            
         },
         displaySignup(){
-            this.reveal = true
+            this.reveal = !this.reveal
             this.signup = true
         }
     }
@@ -49,6 +49,12 @@ export default {
         justify-content: center;
         align-items: center;
     
+  }
+  #signup-button{
+      width: 10%;
+  }
+  #login-button{
+      margin-right: 5%;
   }
 
 #nav a.router-link-exact-active {

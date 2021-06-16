@@ -1,10 +1,10 @@
 <template>
     <div id="add-comment">
-        <button class="add-comment-button"  @click="modifyArticleTextArea=true">Modifier l'article</button>
-            <template v-if="modifyArticleTextArea">
+            
                 <textarea name="text-input" id="comment-text-area" cols="30" rows="2" v-model="body"></textarea>
                 <button id="button-send"  @click="modifyArticle">SEND</button>
-            </template>
+            
+        
     </div>
 </template>
 
@@ -12,6 +12,10 @@
 const axios= require ('axios');
 
     export default {
+        name: "modiFyArticle",
+        components:{
+            
+        },
 
         data:() => ({
             body:"",
@@ -39,3 +43,10 @@ const axios= require ('axios');
         },
     }
 </script>
+
+<style>
+  .button-modify{
+      font-size: 0.7em;
+      margin-bottom: 4%;
+  }
+</style>

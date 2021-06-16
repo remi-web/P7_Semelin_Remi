@@ -13,7 +13,7 @@
                 
             </div>
         </form>
-        <button id="login-button" @click=" login()">LOGIN</button>
+        <button id="login-button" @click="login()">LOGIN</button>
         
     </div>
     
@@ -34,10 +34,9 @@ export default {
         password:"",
         hide: true
     }),
-/*
-    props:
-        ['hideModale'],
-  */      
+
+ 
+       
     methods: {
         login(){
             axios.post ('http://localhost:3000/api/auth/login', {
@@ -55,6 +54,9 @@ export default {
             
             .catch(() => console.log("erreur identifiant"))
         },
+        
+       
+        
     }
 }
 </script>

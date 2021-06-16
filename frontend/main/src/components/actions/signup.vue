@@ -55,10 +55,22 @@ export default {
                 password: this.password,
                 roleId: 1
             })
-            .then((res) => {
-                console.log(res)
-                this.$router.push('Messagerie')
-            })
+            .then(() => {
+                axios.post ('http://localhost:3000/api/auth/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                .then((res) => {
+                    if (res){
+                        localStorage.setItem('token', res.data.token)
+                        localStorage.setItem('userId', res.data.userId)
+                        this.$router.push('home')
+                        }
+                    })
+                })
+                .catch(() => console.log("erreur de connexion"))
+                
+            
             .catch(() => console.log("erreur inscription"))
 
         }

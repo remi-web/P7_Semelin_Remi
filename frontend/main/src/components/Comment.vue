@@ -1,9 +1,9 @@
 <template>
      <div>
       <div> 
-            <p class="comment">{{ note }}    </p>
-            <deleteComment :id=this.id></deleteComment>
-            <modifyComment :id=this.id></modifyComment>
+            <p class="comment">{{ note }} {{ userId }}   </p>
+            <deleteComment :id="this.id"></deleteComment>
+            <modifyComment :id="this.id" :userId="this.userId"></modifyComment>
       </div>
     </div> 
 </template>
@@ -32,6 +32,10 @@ import modifyComment from '../components/actions/modify-comment'
             },
             articleId:{
                 type: Number
+            },
+            pseudo:{
+                type:String,
+                default: ""
             }
         }, 
     }
@@ -39,7 +43,12 @@ import modifyComment from '../components/actions/modify-comment'
 
 <style >
     .comment{
-        width: 30%;
-        font-size: 0.7em;
+        font-size: 0.9em;
+        border: solid;
+        border-width: 1px;
+        border-radius: 8px;
+        width: 60%;
+        padding: 2%;
+        background-color: rgb(243, 237, 237);
     }
 </style>

@@ -1,30 +1,44 @@
 <template>
   <div class="profil">
-    
     <Baner/>
-    PROFIL
-    <!-- <button class="add-comment-button" @click="sendArticleId">Ajouter un commentaire</button> -->
-        <!-- <post -->
-        <!-- v-for="post in pots" :key="post.id" -->
-        <!-- :id="post.id"> -->
-        <!-- </post> -->
-        <!-- {{ id }} -->
+
+    <button class="button-log" @click="displayLogout()" id="logout-button">Se déconnecter</button>
+    <modale id="modale" :reveal="reveal" :logout="logout"></modale>
 
   </div>
 </template>
 
 
 <script>
-import Baner from '../components/baner.vue'
-// import post from '../components/post.vue'
+import Baner from '../components/baner'
+import modale from '../components/modale'
 
 export default {
-  name: 'Profil',
-  components: {
-    Baner, //post
-  },
- 
+    name: 'Profil',
+    components: {
+      Baner, modale
+    },
 
-  
+    data:() => ({
+        reveal: false,
+        logout: false
+    }),
+
+    methods:{
+
+        displayLogout(){
+            this.reveal = true
+            this.logout = true
+        }
+    }
 }
 </script>
+
+<style>
+
+  .button-log{
+    position: absolute;
+    left: 46%;
+  }
+
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div id="add-comment">
-        <button class="comment-button-add"  @click="commentTextArea=true">Ajouter un commentaire</button>
+        <div class="button-add"  @click="commentTextArea=true">Commenter</div>
             <template v-if="commentTextArea">
                 <textarea name="text-input" id="comment-text-area" cols="30" rows="2" v-model="note"></textarea>
                 <button id="button-send"  @click="addComment">SEND</button>
@@ -46,3 +46,18 @@ const axios = require ('axios')
     }
 
 </script>
+
+<style >
+
+    .button-add{
+        font-size: 0.8em;
+        width: 50%;
+        margin-right: 0;
+        color:grey;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .button-add:hover{
+        font-weight: bold;
+    }
+
+</style>

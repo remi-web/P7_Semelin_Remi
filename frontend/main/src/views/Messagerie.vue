@@ -2,7 +2,7 @@
   <div class="messagerie">
     
     <Baner/>
-    MESSAGERIE
+    
   </div>
 </template>
 

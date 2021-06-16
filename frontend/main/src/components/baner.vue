@@ -1,6 +1,6 @@
 <template>
     <div class="baner">
-        <img id="logo" alt="Vue logo" src="../assets/icon-above-font.svg">
+        <img id="logo" alt="Vue logo" src="../assets/icon-above.svg">
     
        
     </div>
@@ -23,19 +23,26 @@
 
 <style>
     #logo{
-        height: 30%;
+        height: 20%;
         width: 10%;
-        bottom: 60%;
-        display: flex;
-        margin-right: 0%;
+        position: absolute;
+        top: 0%;
+        left: 5%;
     }
     #nav{
         display: flex;
-        margin: auto;
-        justify-content: space-evenly;       
+        justify-content: space-evenly;
+        margin-left: 20%;
+        margin-right: 20%;
+        border-radius: 8px;
+        margin-bottom: 2%;
+        margin-top: 4%; 
+        background-color: #f1f1f1;
+        box-shadow: 1px 1px 10px -3px grey
     }
     .baner-txt{
-        font-weight: bold;
-        color: #4a42b9;
+        font-weight: lighter;
+        color: rgb(220,0,100);
+        text-decoration: none;
     }
 </style>

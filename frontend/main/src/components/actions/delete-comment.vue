@@ -1,7 +1,7 @@
 
 <template>
    <div>
-       <button id="button-delete-comment" @click="deleteComment">supprimer le commentaire</button>
+       <button v-if="auth" id="button-delete-comment" @click="deleteComment">supprimer le commentaire</button>
    </div>
 </template>
 
@@ -35,7 +35,16 @@ const axios= require ('axios');
                 .then((res) => {
                     console.log(res)
                 })
-            },
+            }
+        },
+
+        computed:{
+            auth(){
+                if(localStorage.userId == this.userId){
+                    return true
+                }
+                return false
+            }
         }
     }
 

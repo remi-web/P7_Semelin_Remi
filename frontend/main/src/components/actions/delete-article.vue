@@ -1,6 +1,8 @@
 <template>
    <div>
-       <button id="button-send" @click="deleteArticle">Supprimer l' article</button>
+            <p>Etes vous sûr de vouloir supprimer cet article ?</p>
+            <button id="button-send"  @click="deleteArticle">DELETE</button>
+       
    </div>
 </template>
 
@@ -9,6 +11,7 @@ const axios= require ('axios');
 
     export default {
         name: "deleteArticle",
+
         
         props: {
             id:{
@@ -36,3 +39,4 @@ const axios= require ('axios');
     }
 
 </script>
+

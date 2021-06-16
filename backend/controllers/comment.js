@@ -13,8 +13,19 @@ exports.addComment = async (req, res, ) => {
     });
     console.log(comment)
     db.Comment.create (comment)
-        .then(comment => res.status(201).json({ message: "Commentaire ajouté"}))
-        .catch(error => res.status(400).json({ error }))
+        .then(comment => {
+            db.Comment.findAll({
+                attributes: [ 'id', 'userId'],
+                where:{ id: comment.id},
+                include:[
+                    { model: db.users, attributes: [ 'pseudo']}
+                ]
+            })
+            .then(comment => res.status(200).json({ comment }))                    
+            .catch(error => res.status(404).json({ error }))
+        })
+        
+    .catch(error => res.status(400).json({ error }))
 }
 
 exports.modifyComment = async (req, res) => {

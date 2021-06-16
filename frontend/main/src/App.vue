@@ -40,7 +40,10 @@ export default {
 
 
 <style>
-
+  #app{
+    background-color: rgb(233, 227, 219);
+    padding: 5%;
+  }
   #acceuil{
     position: fixed;
         top: 0%;
@@ -52,9 +55,15 @@ export default {
         align-items: center;
     
   }
+  .baner-txt{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 2%;
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  }
+  #nav a.router-link-exact-active {
+  color: #20355F;
+  text-decoration: underline;
+  }
+  
 </style>
 

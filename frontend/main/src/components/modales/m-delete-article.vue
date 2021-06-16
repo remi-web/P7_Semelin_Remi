@@ -1,22 +1,10 @@
 <template>
     <div class="bloc-modale" v-if="reveal">
-        <div class="overlay" @click="hideModale()"></div>
+        <div class="overlay" @click="hideModale"></div>
         <div class="modale cart">
             <button @click="hideModale()"  class="button-close">X</button>
 
-            <div v-if="login">
-                <login></login>
-            </div>
-            <div v-else-if="signup">  
-                <signup></signup>
-            </div>
-            <div v-else-if="logout">  
-                <logout></logout>
-            </div>
-            <div v-else-if="modifyArticle">
-                <modifyArticle></modifyArticle>
-            </div>
-            <div v-else-if="deleteArticle=true">
+            <div v-if="deleteArticle=true">
                <deleteArticle></deleteArticle>
             </div>
            
@@ -27,22 +15,18 @@
 
 <script>
 
-import login from '../components/actions/login'
-import signup from '../components/actions/signup'
-import logout from '../components/actions/logout'
-import modifyArticle from './actions/modify-article'
-import deleteArticle from './actions/delete-article'
+import deleteArticle from '../actions/delete-article'
 
 
 
 export default {
-    name: "modale",
+    name: "modaleDelete",
     components: {
-        login, signup, logout, modifyArticle, deleteArticle
+         deleteArticle
     },
 
     data: () => ({
-        delete: true,
+        delete: true
     }),
 
     props:{
@@ -51,38 +35,19 @@ export default {
             type: Boolean,
             default: false
         },
-        login:{
+        hide:{
             type: Boolean,
             default: false
         },
-        logout:{
-            type: Boolean,
-            default: false
-        },
-        signup:{
-            type: Boolean,
-            default: false
-        },
-        modifyArticle:{
-            type: Boolean,
-            default: false
-        },
-        
         deleteArticle:{
             type: Boolean,
             default: false
-        },
-        /*
-        showModifyArticle:{
-            type: Function,
-        }
-          */     
-      
+        },    
     },
 
     methods:{
         hideModale(){
-            return this.$emit('unreveal')
+            this.reveal = !this.reveal
         },
     }
 
