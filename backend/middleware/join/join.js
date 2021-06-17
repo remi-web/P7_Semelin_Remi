@@ -1,6 +1,7 @@
 const { sequelize } = require("../../models/index")
 const db = require("../../models/index")
 
+//Joins tables for delete comments & reactions with the article
 
 module.exports = async (req, res, next) => {
     try{

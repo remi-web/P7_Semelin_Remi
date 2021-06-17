@@ -49,10 +49,7 @@ const axios= require ('axios');
 </script>
 
 <style>
-    .button-modify{
-        font-size: 0.7em;
-        margin-bottom: 4%;
-    }
+
     .send-button{
         margin-top: 25%
     }

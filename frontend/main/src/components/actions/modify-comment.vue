@@ -1,14 +1,14 @@
 <template>
     <div id="modify-comment">
-        <button v-if="auth" class="comment-button-modify"  @click="modifyCommentTextArea=true">Modifier le commentaire</button>
-            <template v-if="modifyCommentTextArea">
-                <textarea name="text-input" id="comment-text-area" cols="30" rows="2" v-model="note"></textarea>
-                <button id="button-send"  @click="modifyComment">SEND</button>
-            </template>
+        
+        <textarea name="text-input" id="comment-text-area" cols="30" rows="5" v-model="note"></textarea>
+        <button class="confirm-button send-comment-button"  @click="modifyComment()">SEND</button>
+
     </div>
 </template>
 
 <script>
+
 const axios= require ('axios');
 
     export default {
@@ -17,7 +17,9 @@ const axios= require ('axios');
         data:() => ({
             note:"",
             // userId: parseInt(localStorage.getItem('userId')),
-            modifyCommentTextArea: false
+            modifyCommentTextArea: false,
+            revealScrollMenu: false,
+            
         }),
 
         props:{
@@ -33,6 +35,18 @@ const axios= require ('axios');
         },
        
         methods:{
+
+            displayModaleModify(){
+                this.reveal = !this.reveal
+                this.modifyCommentaire = true
+            },
+
+            displayModaleDelete(){
+                this.reveal = !this.reveal
+                this.deleteCommentaire = true
+            },
+
+            
             
             modifyComment(){
                 axios.put ('http://localhost:3000/api/articles/'+ this.articleId+'/comments/'+ this.id+'',
@@ -43,13 +57,11 @@ const axios= require ('axios');
                 })
             }
         },
-        computed:{
-            auth(){
-                if(localStorage.userId == this.userId){
-                    return true
-                }
-                return false
-            }
-        }
     }
 </script>
+
+<style>
+    .send-comment-button{
+        margin-top: 5%;
+    }
+</style>

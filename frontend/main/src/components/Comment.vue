@@ -1,22 +1,43 @@
 <template>
      <div>
-      <div> 
-            <p class="comment">{{ note }} {{ userId }}   </p>
-            <deleteComment :id="this.id"></deleteComment>
-            <modifyComment :id="this.id" :userId="this.userId"></modifyComment>
-      </div>
+        <div class="bloc-comment"> 
+            <p class="comment">{{ note }}{{ userId }}{{ pseudo }}</p>
+            <button v-if="auth" class="user-comment-access" @click="scrollCommentMenu()" >...</button>
+        </div>
+        
+
+        <div id="modify-comment-section" v-if="revealCommentScrollMenu">
+            <button  @click="displayModaleModify(); hideScrollMenu()">modifier</button>
+            <button  @click="displayModaleDelete(); hideScrollMenu()">supprimer</button>                
+        </div>
+
+        <modale
+            :reveal="this.reveal"
+            :modifyCommentaire="this.modifyCommentaire"
+            :deleteCommentaire="this.deleteCommentaire"
+            :commentId="this.id"
+            @unreveal="hideModale()"
+            @undisplay="undisplay()">
+        </modale>
+
     </div> 
 </template>
 
 <script>
-import deleteComment from '../components/actions/delete-comment'
-import modifyComment from '../components/actions/modify-comment'
+import modale from '../components/modale'
 
     export default {
         name: "Comment",
         components:{
-            deleteComment, modifyComment
+            /*deleteComment, modifyComment,*/ modale
         },
+
+        data: () => ({
+            reveal: false,
+            revealCommentScrollMenu: false,
+            modifyCommentaire: false,
+            deleteCommentaire: false
+        }),
 
         props:{
 
@@ -37,18 +58,69 @@ import modifyComment from '../components/actions/modify-comment'
                 type:String,
                 default: ""
             }
-        }, 
+        },
+        
+        methods:{
+            scrollCommentMenu(){
+                this.revealCommentScrollMenu = !this.revealCommentScrollMenu
+                console.log(this.auth)
+            },
+            hideScrollMenu(){
+                this.revealCommentScrollMenu = false
+            },
+
+            displayModaleModify(){
+                this.reveal = !this.reveal
+                this.modifyCommentaire = true
+            },
+
+            displayModaleDelete(){
+                this.reveal = !this.reveal
+                this.deleteCommentaire = true
+            },
+            //hide & init
+            hideModale(){
+                this.reveal = false
+                this.modifyCommentaire = false
+                this.deleteCommentaire = false
+            },
+            //hide comment message from the modale
+            undisplay(){
+                this.deleteCommentaire = false
+            }
+        },
+        computed:{
+            auth(){
+                if(localStorage.userId == this.userId){
+                    return true
+                }
+                return false
+            }
+        }
     }
 </script>
 
 <style >
+    .bloc-comment{
+        display: flex;
+    }
     .comment{
-        font-size: 0.9em;
+        font-size: 0.7em;
         border: solid;
         border-width: 1px;
         border-radius: 8px;
-        width: 60%;
         padding: 2%;
+        margin: 1.5%;
         background-color: rgb(243, 237, 237);
+        position: relative;
     }
+    .user-comment-access{
+        height: 50%;
+        margin-left: 5%;
+        margin-top: 3%;
+       
+        
+    }
+  
+    
 </style>

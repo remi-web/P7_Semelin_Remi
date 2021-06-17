@@ -1,14 +1,14 @@
 <template>
     <div >
         
-        <main id= "posts" >{{ id }}
+        <main id= "posts" >
             
             <p class="pseudo">{{ pseudo }}</p>
-            <button  @click="scrollMenu()" class="user-post-access">...</button>
+            <button class="user-post-access" @click="scrollMenu()">...</button>
 
             <div id="modify-section" v-if="revealScrollMenu">
-                <button class="button" @click="displayModaleModify()">modifier</button>
-                <button class="button" @click="displayModaleDelete()">supprimer</button>                
+                <button class="button modify" @click="displayModaleModify(); hideScrollMenu()">modifier</button>
+                <button class="button delete" @click="displayModaleDelete(); hideScrollMenu()">supprimer</button>                
             </div>
 
             <modale 
@@ -26,16 +26,30 @@
                     v-for="(reaction, i) in Reactions" :key="i"
                     :reaction="reaction.reaction">
                 </reaction>
-                
+              {{ imageUrl }}
+              <img src="imageUrl">  
             </article>
-            <commentaire 
+    
+            <addComment 
+                :id="this.id"
+                @addedComment="addComment">
+            </addComment>
+
+            
+            <div>
+                <commentaire
                     v-for="comment in Comments" :key="comment.id"
                     :note="comment.note"
                     :id="comment.id"
                     :articleId="comment.articleId"
-                    :userId="comment.userId">
-            </commentaire>                 
-                <addComment :id="this.id"></addComment>      
+                    :userId="comment.userId"
+                    :pseudo="comment.pseudo">                    
+                </commentaire>
+            </div>
+           
+                
+                          
+                      
         </main>
     </div> 
 </template>
@@ -58,9 +72,11 @@ import modale from '../components/modale'
             click: false,
             note:"",
             revealScrollMenu: false,
+            revealCommentScrollMenu: false,
             reveal: false,
             modifyArticle: false,
-            deleteArticle: false
+            deleteArticle: false,
+            // get: false
         }),
 
         props:{
@@ -91,6 +107,11 @@ import modale from '../components/modale'
             },
         },
         methods: {
+            /*
+            getComment(){
+                this.get = true
+            },
+            */
             scrollMenu(){
                 this.revealScrollMenu = !this.revealScrollMenu
             },
@@ -98,23 +119,33 @@ import modale from '../components/modale'
             displayModaleModify(){
                 this.reveal = !this.reveal
                 this.modifyArticle = true
-                
-
             },
+
             displayModaleDelete(){
                 this.reveal = !this.reveal
                 this.deleteArticle = true
             },
+            //hide modale & init value 
             hideModale(){
                 this.reveal = false
                 this.modifyArticle = false
                 this.deleteArticle = false
             },
+            hideScrollMenu(){
+                this.revealScrollMenu = false
+            },
+             //hide validate modifyArticle message   
             undisplay(){
                 this.modifyArticle = false
-            }
+            },
+            addComment(payload){
+                console.log(payload.comment)
+                this.Comments.push(payload.comment)
+                this.$emit('getArticle')
+            },
 
-        }
+        },
+        
     }
 </script>
 
@@ -125,7 +156,6 @@ import modale from '../components/modale'
         font-size: 1.2em;
         margin-bottom: 10%;
         position: relative;
-        
     }
     .article{
         border-style: groove;
@@ -142,26 +172,36 @@ import modale from '../components/modale'
     
     #modify-section{
         position: absolute;
-        left: 89.5%;
+        left: 90%;
         display: flex;
+        flex-direction: column; 
         border: solid 1px;
+        border-radius: 8%;
     }
     
     .button{
+        /* background: rgb(216, 213, 213); */
         border: none;
+    }
+    .button:hover{
+        background: rgb(252, 185, 185);
+    }
+
+    .delete{
+        border-top: solid 0.5px;
     }
 
     .user-post-access{
         position: relative;
         left: 93%;
-        margin-bottom: 2%;
+        margin-bottom: 1%;
     }
-    #modify-section{
-        margin-top: 5%;
-    }
+  
     .pseudo{
         color: rgb(80,80,80);
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         font-style: italic;
+        position: absolute;
+        top: -5%
     }
 </style>

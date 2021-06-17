@@ -36,9 +36,9 @@
         margin-right: 20%;
         border-radius: 8px;
         margin-bottom: 2%;
-        margin-top: 4%; 
+        margin-top: 2%; 
         background-color: #f1f1f1;
-        box-shadow: 1px 1px 10px -3px grey
+        box-shadow: 1px 1px 10px -3px grey;
     }
     .baner-txt{
         font-weight: lighter;

@@ -16,10 +16,6 @@
                 <logout></logout>
             </div>
 
-            <div v-else-if="addArticle">
-                <addArticle></addArticle>
-            </div>
-
             <div v-else-if="modifyArticle">
                 <modifyArticle 
                     :id="this.id"
@@ -29,15 +25,31 @@
             </div>
             <div v-else-if="displayMessage">
                     {{ message }}
-                    <button class="confirm-button" @click="hideModale()">OK</button>
+                    <button class="confirm-button" @click="hideModale(); reload()">OK</button>
             </div>
 
-            <div v-else-if="deleteArticle=true">
+            <div v-else-if="deleteArticle">
                 <deleteArticle 
                     :id="this.id"
                     @unauthorized="unauthorized()"
                     @authorized="authorized()">
-            </deleteArticle>
+                </deleteArticle>
+            </div>
+
+            <div v-if="modifyCommentaire">
+                <modifyComment
+                    :id="this.commentId"
+                    @unauthorized="unauthorized()"
+                    @authorized="authorized()">
+                </modifyComment>
+            </div>
+
+            <div v-if="deleteCommentaire">
+                <deleteComment
+                    :id='this.commentId'
+                    @unauthorized="unauthorized()"
+                    @authorized="authorized()">
+                </deleteComment>
             </div>
            
             
@@ -50,16 +62,19 @@
 import login from '../components/actions/login'
 import signup from '../components/actions/signup'
 import logout from '../components/actions/logout'
-import addArticle from '../components/actions/add-article'
 import modifyArticle from './actions/modify-article'
 import deleteArticle from './actions/delete-article'
+import modifyComment from './actions/modify-comment'
+import deleteComment from './actions/delete-comment'
+
 
 
 
 export default {
     name: "modale",
     components: {
-        login, signup, logout, addArticle, modifyArticle, deleteArticle
+        login, signup, logout, modifyArticle, deleteArticle,
+        modifyComment, deleteComment
     },
 
     data: () => ({
@@ -87,15 +102,28 @@ export default {
             type: Boolean,
             default: false
         },
-        addArticle:{
-            type: Boolean,
-            default: false
-        },
+        
         modifyArticle:{
             type: Boolean,
             default: false
         },
+        deleteArticle:{
+            type: Boolean,
+            default: false
+        },
+        modifyCommentaire:{
+            type: Boolean,
+            default: false
+        },
+        deleteCommentaire:{
+            type: Boolean,
+            default: false
+        },
+        
         id:{
+            type: Number
+        },
+        commentId:{
             type: Number
         }   
     },
@@ -116,16 +144,23 @@ export default {
             if(this.modifyArticle){
                 this.message = "Article modifé"
             }
+            else if(this.modifyCommentaire){
+                this.message = "Commentaire modifé"
+            }
             else if(this.deleteArticle){
                 this.message = "Article supprimé"
+            }
+            else if(this.deleteCommentaire){
+                this.message = "Commentaire supprimé"
             }
             this.$emit('undisplay')
             this.displayMessage = true
         },
-      
+        
         reload(){
             document.location.reload()
         }
+        
     }
 }
 </script>

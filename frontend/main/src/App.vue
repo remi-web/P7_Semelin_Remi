@@ -40,7 +40,7 @@ export default {
 <style>
   #app{
     background-color: rgb(233, 227, 219);
-    padding: 5%;
+    padding: 2%;
   }
   #acceuil{
     position: fixed;

@@ -15,7 +15,7 @@ exports.addComment = async (req, res, ) => {
     db.Comment.create (comment)
         .then(comment => {
             db.Comment.findAll({
-                attributes: [ 'id', 'userId'],
+                attributes: [ 'id', 'userId', 'note'],
                 where:{ id: comment.id},
                 include:[
                     { model: db.users, attributes: [ 'pseudo']}

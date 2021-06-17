@@ -1,7 +1,8 @@
 
 <template>
    <div>
-       <button v-if="auth" id="button-delete-comment" @click="deleteComment">supprimer le commentaire</button>
+       <p>Etes vous sûr de vouloir supprimer ce commentaire ?</p>
+       <button  id="button-delete-comment" @click="deleteComment()">DELETE</button>
    </div>
 </template>
 
@@ -32,12 +33,15 @@ const axios= require ('axios');
                             { Authorization: 'Bearer ' + localStorage.getItem('token')},
                     }       
                 )
-                .then((res) => {
-                    console.log(res)
+                .then(() => {
+                    this.$emit('authorized')
+                })
+                .catch(() => {
+                    this.$emit('unauthorized')
                 })
             }
         },
-
+    /*
         computed:{
             auth(){
                 if(localStorage.userId == this.userId){
@@ -46,6 +50,7 @@ const axios= require ('axios');
                 return false
             }
         }
+        */
     }
 
 </script>

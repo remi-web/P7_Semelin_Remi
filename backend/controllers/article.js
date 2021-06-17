@@ -5,16 +5,15 @@ const fs = require('fs')
 
 
 
-exports.create = async (req, res) => {
+exports.create = async (req, res,file) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-    console.log(decodedToken.userId)
 
     const article = ({
         body: req.body.body,
         userId: decodedToken.userId,
-        // title: req.body.title,
-        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        title: req.body.title,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 
     }); 
     console.log(article)
