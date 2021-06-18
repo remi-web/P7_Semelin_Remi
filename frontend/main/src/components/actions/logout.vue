@@ -20,6 +20,7 @@ export default {
     methods: {
         logout(){
             localStorage.removeItem('token')
+            localStorage.removeItem('userId')
             this.$router.push('connexion')
         }
     }

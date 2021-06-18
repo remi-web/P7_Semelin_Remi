@@ -6,10 +6,8 @@
         <div>
             <addArticle @added="add"></addArticle>
         </div>
-       
 
-      <post
-      
+        <post
           v-for="article in articles" :key="article.id"
           :body="article.body"
           :imageUrl="article.imageUrl"
@@ -17,12 +15,9 @@
           :Comments="article.Comments"
           :id="article.id"
           :userId="article.userId"
-          :pseudo="article.User.pseudo"
-          
-          >
-
+          :pseudo="article.User.pseudo">
         </post> 
-        <!-- <addImage></addImage>  -->
+
         <modale></modale>    
    </div>
 </template>
@@ -32,7 +27,6 @@ import Baner from '../components/baner'
 import post from '../components/post'
 import addArticle from '../components/actions/add-article'
 import modale from '../components/modale'
-// import addImage from '../components/actions/add-image'
 
 const axios = require ('axios');
 
@@ -86,7 +80,7 @@ export default {
         margin-top: 5%;
         border-radius: 8px;
         z-index: -1;
-        box-shadow: 0px 4px 9px -3px grey;
+        box-shadow: 2px 0px 16px -3px grey;
         height: 800px;
         overflow: scroll; 
 

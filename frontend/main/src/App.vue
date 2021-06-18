@@ -39,8 +39,11 @@ export default {
 
 <style>
   #app{
-    background-color: rgb(233, 227, 219);
-    padding: 2%;
+    background-image: url('assets/icon.png');
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* padding: 8%; */
   }
   #acceuil{
     position: fixed;

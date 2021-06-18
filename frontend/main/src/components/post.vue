@@ -20,21 +20,20 @@
                 @undisplay="undisplay()">
             </modale>
 
-            <article class="article"> {{ body }}
-
-                <reaction
-                    v-for="(reaction, i) in Reactions" :key="i"
-                    :reaction="reaction.reaction">
-                </reaction>
-              {{ imageUrl }}
-              <img src="imageUrl">  
+            <article class="article">
+                <p class="txt-article"> {{ body }}</p>
+                <img class="image-post" :src="this.imageUrl">  
             </article>
-    
+
+            <reaction
+                v-for="(reaction, i) in Reactions" :key="i"
+                :reaction="reaction.reaction">
+                </reaction>
+
             <addComment 
                 :id="this.id"
                 @addedComment="addComment">
             </addComment>
-
             
             <div>
                 <commentaire
@@ -46,10 +45,6 @@
                     :pseudo="comment.pseudo">                    
                 </commentaire>
             </div>
-           
-                
-                          
-                      
         </main>
     </div> 
 </template>
@@ -156,14 +151,13 @@ import modale from '../components/modale'
         font-size: 1.2em;
         margin-bottom: 10%;
         position: relative;
+        border-bottom: solid 1px;
     }
     .article{
         border-style: groove;
         border-color: red;
         border-width: 1px;
         border-radius: 5px;
-        /* height: 100px; */
-        /* overflow: auto; */
         padding: 5%;
         color: gray;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
@@ -201,7 +195,11 @@ import modale from '../components/modale'
         color: rgb(80,80,80);
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         font-style: italic;
-        position: absolute;
-        top: -5%
+        margin-bottom: 0%;
+    }
+    .image-post{
+        width: 95%;
+        margin-left: 3%;
+        
     }
 </style>

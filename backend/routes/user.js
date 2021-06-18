@@ -9,7 +9,7 @@ const app = express()
 
 router.post('/signup', userCtrl.signup);
 router.post('/login',  userCtrl.login);
-router.get('/user/:id', authUserAcces, userCtrl.findOne)
+router.post('/user/:id', authUserAcces, userCtrl.findOne)
 router.put('/user/:id', authUserAcces, userCtrl.modify)
 
 module.exports = router

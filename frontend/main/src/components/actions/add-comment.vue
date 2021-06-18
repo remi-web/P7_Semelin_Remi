@@ -36,11 +36,11 @@ const axios = require ('axios')
                         }                  
                 )
                 .then((response) => {
-                    console.log(response.data.comment)
                     if(response){
                         this.$emit("addComment", {
                            comment: response.data.comment[0]
                         })
+                        this.$emit('unreveal')
                     }
                 })
             }

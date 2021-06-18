@@ -12,8 +12,8 @@ exports.create = async (req, res,file) => {
     const article = ({
         body: req.body.body,
         userId: decodedToken.userId,
-        title: req.body.title,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        // title: req.body.title,
+        imageUrl:  `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 
     }); 
     console.log(article)

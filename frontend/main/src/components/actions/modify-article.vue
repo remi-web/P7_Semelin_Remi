@@ -30,9 +30,12 @@ const axios= require ('axios');
             
             modifyArticle(){
                 axios.put ('http://localhost:3000/api/articles/'+ this.id+'',
-                { body: this.body,
-                  title: "test" },
-                { headers: 
+                { 
+                    body: this.body,
+                    title: "test" 
+                },
+                {
+                    headers: 
                         {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                         }

@@ -5,7 +5,11 @@
             <button @click="hideModale()"  class="button-close">X</button>
 
             <div v-if="login">
-                <login></login>
+                <login 
+                    :loginButton="!userInfoAccess" 
+                    @unreveal="hideModale()">
+                </login>
+                
             </div>
 
             <div v-else-if="signup">  
@@ -39,6 +43,7 @@
             <div v-if="modifyCommentaire">
                 <modifyComment
                     :id="this.commentId"
+                    @unreveal="hideModale()"
                     @unauthorized="unauthorized()"
                     @authorized="authorized()">
                 </modifyComment>
@@ -125,13 +130,18 @@ export default {
         },
         commentId:{
             type: Number
-        }   
+        } ,
+        userInfoAccess:{
+            type: Boolean,
+            default: false
+        }  
     },
 
     methods:{
         
         hideModale(){
             this.$emit('unreveal')
+            console.log(this.userInfoAccess)
         },
 
         unauthorized(){
@@ -159,6 +169,12 @@ export default {
         
         reload(){
             document.location.reload()
+        },
+        connexion(){
+            this.$emit('connexion')
+        },
+        confirm(){
+            this.$emit('confirm')
         }
         
     }

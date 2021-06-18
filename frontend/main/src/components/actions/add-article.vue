@@ -1,12 +1,13 @@
 <template>
    <div id="add-article">
        <button class="add-article-button" @click="articleTextArea()">Publier un article</button>
+
        <template v-if="addArticle">
-            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="10" v-model="body"></textarea>
-            <addImage></addImage>
-        <!-- <label for="file"></label> -->
-        
-            <button class="add-article-button" @click="sendArticle(); articleTextArea()">SEND</button>
+            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="5" v-model="body">
+                
+            </textarea>
+            <input class="file-insert-button button" type="file"  name="image" ref="image" accept="image/png, image/jpeg" v-on:change="value()">
+            <button class="send-article-button" @click="sendArticle(); articleTextArea()">SEND</button>
        </template>
        
    </div>
@@ -14,14 +15,12 @@
 
 <script>
 
-import addImage from '../actions/add-image'
 
 const axios= require ('axios');
 
     export default {
         name: "addArticle",
         components:{
-            addImage
         },
 
         data:() => ({
@@ -30,7 +29,6 @@ const axios= require ('axios');
             addArticle: false,
             image:""
         }),
-
        
         methods:{
 
@@ -39,39 +37,35 @@ const axios= require ('axios');
             },
             
             sendArticle(){
-
                 const formData = new FormData();
-                    if (this.image !== null) {
+                if (this.image !== null) {
                     formData.append("image", this.image);
-                    formData.append("content", this.body);
-                    // formData.append("user_id",parseInt(localStorage.getItem('userId')))
-
-                axios.post ('http://localhost:3000/api/articles', formData,{
-                    headers:{
+                    formData.append("body", this.body);
+                    // formData.append("userId",parseInt(localStorage.getItem('userId')));
+        
+                } else
+                {
+                    formData.append("body", this.body);
+                    // formData.append("userId", parseInt(localStorage.getItem('userId')));
+                }    
+                axios.post('http://localhost:3000/api/articles', formData, {
+                    headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
-                
-                /*
-                    { 
-                        // body: this.body,
-                        // imagerUrl: "image-url"
-                        },
-                    {
-                    headers:{
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    },
-                    */
                 })
-                .then((response) => {
-                    if(response){
-                       this.$emit("added", {
-                           article: response.data.article[0]
-                        }) 
-                    }
+                .then((res) => {
+                    console.log(formData);
+                    this.$emit('added',{
+                        article: res.data.article[0]
+                    });
+                    console.log(res);
                 })
+            },
+            value(){
+                this.image = this.$refs.image.files[0];
+                console.log(this.$refs.image.files[0])
             }
-        }
         }
     }
 </script>
@@ -82,8 +76,6 @@ const axios= require ('axios');
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 10%;
-        /* position: fixed; */
     }
     .add-article-button{
         margin-top: 5%;
@@ -94,6 +86,15 @@ const axios= require ('axios');
         width: 80%;
         border: solid 1px red;
         border-radius: 8px;
+    }
+    .file-insert-button{
+        margin-top: 2%
+    }
+    .button{
+        border-radius: 8px;
+    }
+    .send-article-button{
+        margin-top: 2%;
     }
 
 </style>
