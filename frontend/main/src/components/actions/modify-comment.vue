@@ -45,15 +45,19 @@ const axios= require ('axios');
                 this.reveal = !this.reveal
                 this.deleteCommentaire = true
             },
-
-            
             
             modifyComment(){
-                axios.put ('http://localhost:3000/api/articles/'+ this.articleId+'/comments/'+ this.id+'',
-                { note: this.note},
-                { headers: {
+                axios.put ('http://localhost:3000/api/articles/'+ this.articleId+'/comments/'+ this.id+'',{
+                    note: this.note
+                },
+                { 
+                headers: 
+                    {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
-                        }
+                    }
+                })
+                .then(() =>{
+                     this.$emit('unreveal')
                 })
             }
         },

@@ -4,7 +4,8 @@ const router = express.Router()
 const auth = require('../middleware/auth/auth')
 const reaction = require('../controllers/reaction')
 
-router.post ('/:id/reactions',  reaction.addReaction);
-
+router.post('/:id/reactions',  auth, reaction.addReaction);
+router.get('/:id/reactions', auth, reaction.getReactions)
+router.get('/:id/reactionsTypes', auth, reaction.getReactionsTypes)
 
 module.exports = router

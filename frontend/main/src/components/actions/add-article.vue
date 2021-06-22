@@ -27,7 +27,8 @@ const axios= require ('axios');
             body:"",
             userId: parseInt(localStorage.getItem('userId')),
             addArticle: false,
-            image:""
+            image:"",
+            empty: "name"
         }),
        
         methods:{
@@ -40,13 +41,11 @@ const axios= require ('axios');
                 const formData = new FormData();
                 if (this.image !== null) {
                     formData.append("image", this.image);
-                    formData.append("body", this.body);
-                    // formData.append("userId",parseInt(localStorage.getItem('userId')));
-        
+                    formData.append("body", this.body);        
                 } else
                 {
                     formData.append("body", this.body);
-                    // formData.append("userId", parseInt(localStorage.getItem('userId')));
+                    formData.append("image", this.empty)
                 }    
                 axios.post('http://localhost:3000/api/articles', formData, {
                     headers: {

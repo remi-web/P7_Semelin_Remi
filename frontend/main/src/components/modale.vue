@@ -192,6 +192,7 @@ export default {
         justify-content: center;
         align-items: center;
         z-index: 1;
+        
     }
 
     .overlay{
@@ -209,6 +210,8 @@ export default {
         color: #333;
         padding: 50px;
         position: fixed;
+        border-radius: 8px;
+
     }
     .button-close{
         background-color: red;

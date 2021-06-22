@@ -11,13 +11,11 @@
           v-for="article in articles" :key="article.id"
           :body="article.body"
           :imageUrl="article.imageUrl"
-          :Reactions="article.Reactions"
-          :Comments="article.Comments"
           :id="article.id"
           :userId="article.userId"
           :pseudo="article.User.pseudo">
         </post> 
-
+    
         <modale></modale>    
    </div>
 </template>
@@ -28,18 +26,17 @@ import post from '../components/post'
 import addArticle from '../components/actions/add-article'
 import modale from '../components/modale'
 
+
 const axios = require ('axios');
 
 export default {
     name: 'Home',
     components: {
         Baner, post, addArticle, modale,
-        // addImage
     },
 
     data:() => ({
         articles: [],
-        // connect: false,
         login: false,
         reveal: false,
         logout: false

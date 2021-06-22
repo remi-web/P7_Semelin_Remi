@@ -1,6 +1,8 @@
-const { Sequelize, json } = require('sequelize');
+const { Sequelize, json, where } = require('sequelize');
 const db = require("../models/index");
-const jwt = require ('jsonwebtoken')
+const jwt = require ('jsonwebtoken');
+const article = require('../models/article');
+const { users, comments } = require('../models/index');
 
 exports.addComment = async (req, res, ) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -16,7 +18,7 @@ exports.addComment = async (req, res, ) => {
         .then(comment => {
             db.Comment.findAll({
                 attributes: [ 'id', 'userId', 'note'],
-                where:{ id: comment.id},
+                 where:{ id: comment.id},
                 include:[
                     { model: db.users, attributes: [ 'pseudo']}
                 ]
@@ -51,4 +53,17 @@ exports.deleteComment = async (req, res) => {
         .catch( error => res.status(400).json({ error }))        
     
     .catch(error => res.status(404).json({ error }))
+}
+
+exports.getComments = async ( req, res) => {
+    article.id = req.params.id
+    db.Comment.findAll({
+        where:{ articleId: article.id},
+        include:[
+            { model: db.users, attributes: [ 'pseudo']},
+        ],
+        order: [['createdAt', 'DESC']]
+    })
+    .then(comments => res.status(200).json({ comments }))                    
+    .catch(error => res.status(404).json({ error  }))
 }

@@ -4,3 +4,6 @@
         <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" v-on:change="value()">
     </div>
 </template>
+
+
+ 

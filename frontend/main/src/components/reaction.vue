@@ -1,27 +1,24 @@
 <template>
      <div>
       <div> 
-       
-           <p>{{ reaction }}</p>
-       
-        
+        <p>{{ name }}</p>
       </div>
     </div> 
 </template>
 
 <script>
     export default {
-        name: "reaction",
+        name: "reactions",
 
         props:{
 
-            reaction:{
+            name:{
                 type: String,
                 default:""
             },
-            
+            pseudo:{
+                type: String
+            }
         }, 
-     
-        
     }
 </script>

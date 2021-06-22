@@ -6,11 +6,10 @@
         :reveal="reveal" 
         :logout="logout" 
         :login="login" 
-        :userInfoAccess="userInfoAccess" 
         @unreveal="hideModale()">
       </modale>
 
-    <button id="mes-infos" @click="userAccess(); displayLogin()">Mes infos</button>
+    <button id="mes-infos">Mes infos</button>
       <ul class="user-infos">
           <li class="attribute">Nom: <p class="name" >{{ lastName }}</p>
           </li>
@@ -24,14 +23,18 @@
 
     <button class="button-log" @click="displayLogout()" id="logout-button">Se déconnecter</button>
 
+
   </div>
 </template>
 
 
 <script>
+const axios = require ('axios');
+
 import Baner from '../components/baner'
 import modale from '../components/modale'
-let user = JSON.parse(localStorage.getItem('userData'))
+
+
 export default {
     name: 'Profil',
     components: {
@@ -42,11 +45,12 @@ export default {
         reveal: false,
         login: false,
         logout: false,
-        userInfoAccess: false,
-        firstName: user.user.firstName,
-        lastName: user.user.lastName,
-        pseudo: user.user.pseudo,
-        email: user.user.email
+        id: localStorage.getItem('userId'),
+        firstName:"",
+        lastName: "",
+        pseudo: "",
+        email: "",
+        userPassword: ""
     }),
 
     methods:{
@@ -60,17 +64,30 @@ export default {
             this.login = false
             this.logout = false
             this.userInfoAccess = false
-            console.log(user.user.firstName)
+            console.log(this.firstName)
         },
         displayLogin(){
             this.reveal = !this.reveal
             this.login = true
             // console.log(this.userInfoAccess)
         },
-        userAccess(){
-          this.userInfoAccess = true
-        },
+        
     },
+    beforeMount(){
+            axios.get('http://localhost:3000/api/auth/user/'+this.id, {
+              
+                headers: {
+                    'authorization': 'bearer ' + localStorage.getItem('token'),
+                }
+            })
+            .then((user) => {
+                console.log(user)
+                this.firstName = user.data.user.firstName,
+                this.lastName = user.data.user.lastName,
+                this.pseudo = user.data.user.pseudo,
+                this.email = user.data.user.email
+            })
+      },
 }
 </script>
 
@@ -89,6 +106,8 @@ export default {
     align-items: center;
     padding-top: 3%;
     background: #f1f1f1;
+    opacity: 0.6;
+    width: 50%;
   }
   #mes-infos{
     margin-top: 10%;
@@ -100,13 +119,13 @@ export default {
     display: flex;
     border: solid 1px;
     border-radius: 8px;
-    width: 50%;
+    width: 70%;
     margin-bottom: 3%;
     /* box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset; */
     box-shadow: -1px 0px 4px 0px gray
   }
   .name{
-    margin-left: 40%;
+    margin-left: 20%;
   }
 
 </style>

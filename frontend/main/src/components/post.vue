@@ -21,28 +21,47 @@
             </modale>
 
             <article class="article">
-                <p class="txt-article"> {{ body }}</p>
+                <p class="txt-article"> {{ body }}{{id}}</p>
                 <img class="image-post" :src="this.imageUrl">  
             </article>
 
-            <reaction
-                v-for="(reaction, i) in Reactions" :key="i"
-                :reaction="reaction.reaction">
-                </reaction>
+            <div class="addComment-reactionType-bloc">
+                <addComment 
+                    :id="this.id"
+                    @addedComment="addComment()">
+                </addComment>
 
-            <addComment 
-                :id="this.id"
-                @addedComment="addComment">
-            </addComment>
+                <div class="reaction-type-bloc">
+                    <addReaction
+                        :articleId="this.id">
+                    </addReaction>
+                    
+                </div>
+            </div>
+            <div v-if="displayReactions">
+                <reactions class="reaction"
+                    v-for="reaction in reactions" :key="reaction.id"
+                    :reaction="reaction.reaction"
+                    :name="reaction.name"
+                    :pseudo="reaction.User.pseudo">
+                </reactions>
+            </div>
+
+            
             
             <div>
-                <commentaire
-                    v-for="comment in Comments" :key="comment.id"
+               <button class="display-comments-button" @click="getComments(); displayCommentaire()">Voir les commentaires</button> 
+               <button class="display-reactions-button" @click="getReactions(); displayReaction()">Voir les reactions</button>
+               <!-- <button class="display-reactionsTypes-button" @click="getReactionsTypes()">Voir les reactionsTypes</button> -->
+                
+            </div>
+            <div v-if="displayComments">   
+               <commentaire 
+                    v-for="comment in comments" :key="comment.id"
                     :note="comment.note"
                     :id="comment.id"
-                    :articleId="comment.articleId"
                     :userId="comment.userId"
-                    :pseudo="comment.pseudo">                    
+                    :pseudo="comment.User.pseudo">                    
                 </commentaire>
             </div>
         </main>
@@ -51,27 +70,33 @@
 
 <script>
 
+const axios = require ('axios')
 import commentaire from '../components/comment'
-import reaction from './reaction.vue'
+import reactions from './reaction'
+import addReaction from '../components/actions/add-reaction'
 import addComment from '../components/actions/add-comment'
 import modale from '../components/modale'
 
     export default {
         name: "post",
         components: {
-            commentaire, reaction, addComment, modale,
+            commentaire, reactions, addReaction, addComment, modale,
         },
         
         data:() => ({
             commentTextArea: false,
             click: false,
-            note:"",
+            // note:"",
             revealScrollMenu: false,
             revealCommentScrollMenu: false,
             reveal: false,
             modifyArticle: false,
             deleteArticle: false,
-            // get: false
+            comments: [],
+            displayComments: false,
+            reactions: [],
+            displayReactions: false,
+            name: ""
         }),
 
         props:{
@@ -90,23 +115,13 @@ import modale from '../components/modale'
                 type:String,
                 default:""
             },
-            Comments:{
-                type: Array
-            },
-            Reactions:{
-                type: Array
-            },
             pseudo:{
                 type: String,
                 default: ""
             },
         },
         methods: {
-            /*
-            getComment(){
-                this.get = true
-            },
-            */
+           
             scrollMenu(){
                 this.revealScrollMenu = !this.revealScrollMenu
             },
@@ -120,26 +135,68 @@ import modale from '../components/modale'
                 this.reveal = !this.reveal
                 this.deleteArticle = true
             },
+
             //hide modale & init value 
             hideModale(){
                 this.reveal = false
                 this.modifyArticle = false
                 this.deleteArticle = false
             },
+
             hideScrollMenu(){
                 this.revealScrollMenu = false
             },
+
              //hide validate modifyArticle message   
             undisplay(){
                 this.modifyArticle = false
             },
+
             addComment(payload){
                 console.log(payload.comment)
-                this.Comments.push(payload.comment)
-                this.$emit('getArticle')
+                this.comments.push(payload.comment)
+                this.getComments()
+                console.log(this.displayComments)
+                // this.displayComments = false
             },
 
+            getComments(){
+                axios.get('http://localhost:3000/api/articles/'+this.id+'/comments', {
+                    headers: {
+                        'authorization': 'bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then((response) => {
+                    this.comments = response.data.comments;
+                    console.log(this.comments)
+                })
+            },
+
+            displayCommentaire(){
+                this.displayComments = !this.displayComments
+                console.log(this.displayComments)
+            },
+
+            getReactions(){
+                axios.get('http://localhost:3000/api/articles/'+this.id+'/reactions', {
+                    headers: {
+                        'authorization': 'bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then((response) => {
+                    this.reactions = response.data.reactions;
+                    console.log(this.reactions)
+                    
+                })
+            },
+
+            
+
+            displayReaction(){
+                this.displayReactions = !this.displayReactions
+            },
         },
+
         
     }
 </script>
@@ -202,4 +259,8 @@ import modale from '../components/modale'
         margin-left: 3%;
         
     }
+    .addComment-reactionType-bloc{
+        display: flex
+    }
+    
 </style>

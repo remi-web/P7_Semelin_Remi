@@ -1,6 +1,6 @@
 <template>
     <div id="formSignup">
-        <form id="form" action="signup" method="post">
+        <form id="form" >
         <main>
                 <div class="input">
                     <label for="name"></label>
@@ -22,7 +22,7 @@
                     <label for="name"></label>
                     <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
                 </div>
-                <button id="signup-button" @click="signup">SIGNUP</button>
+                <button id="signup-button" @click.prevent.stop="signup">SIGNUP</button>
         </main>
 
         </form>

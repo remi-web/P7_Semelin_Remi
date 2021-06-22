@@ -39,5 +39,6 @@ db.comments = require('./comment')(sequelize, Sequelize)
 db.users = require('./user')(sequelize, Sequelize)
 db.roles = require ('./role')(sequelize, Sequelize)
 db.reactions= require('./reaction')(sequelize, Sequelize)
+db.reactionsTypes = require('./reactionsTypes')(sequelize, Sequelize)
 
 module.exports = db;

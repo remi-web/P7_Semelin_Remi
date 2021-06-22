@@ -29,13 +29,17 @@ const axios = require ('axios')
 
         methods: {
             addComment(){
-                axios.post('http://localhost:3000/api/articles/'+this.id+'/comments',
-                        { note: this.note}, 
-                        { headers:
-                            { Authorization: 'Bearer ' + localStorage.getItem('token')},
-                        }                  
-                )
+                axios.post('http://localhost:3000/api/articles/'+this.id+'/comments',{ 
+                    note: this.note
+                    }, 
+                    {
+                    headers:
+                        {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        },
+                    })
                 .then((response) => {
+                    console.log(response)
                     if(response){
                         this.$emit("addComment", {
                            comment: response.data.comment[0]

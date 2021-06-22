@@ -1,7 +1,7 @@
 <template>
      <div>
         <div class="bloc-comment"> 
-            <p class="comment">{{ note }}{{ userId }}{{ pseudo }}</p>
+        <p class="pseudo">{{ pseudo }}</p><p class="comment">{{ note }}</p>
             <button v-if="auth" class="user-comment-access" @click="scrollCommentMenu()" >...</button>
         </div>
         
@@ -63,7 +63,6 @@ import modale from '../components/modale'
         methods:{
             scrollCommentMenu(){
                 this.revealCommentScrollMenu = !this.revealCommentScrollMenu
-                console.log(this.auth)
             },
             hideScrollMenu(){
                 this.revealCommentScrollMenu = false

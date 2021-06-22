@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container">abc
         <button @click="displayLogin()" id="login-button">Connexion</button>ou
         <button @click="displaySignup()" id="signup-button">Inscription</button>
         <modale class="modale" 
@@ -12,7 +12,7 @@
 </template>
 
 <script>
- import modale from '../components/modale'
+import modale from '../components/modale'
 
 export default {
     name: "connexion",

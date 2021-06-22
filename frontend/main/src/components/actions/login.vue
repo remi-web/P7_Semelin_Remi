@@ -14,10 +14,7 @@
             </div>
         </form>
         <div v-if="loginButton">
-            <button  class="login-button" @click="login()">LOGIN</button>
-        </div>
-        <div v-if="!loginButton">
-            <button  class="login-button" @click="getUser(); hideModale()" >CONFIRM</button>
+            <button  class="login-button" @click.stop="login()">LOGIN</button>
         </div>
         
         
@@ -39,11 +36,7 @@ export default {
         email:"",
         password:"",
         hide: true,
-        id: localStorage.getItem('userId'),
-        firstName:"",
-        lastName: "",
-        pseudo: "",
-        userPassword: ""
+        
     }),
 
     props:{
@@ -66,32 +59,17 @@ export default {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('userId', res.data.userId)
                 this.$router.push('home')
-                this.$emit('connected')
+                this.$emit('unreveal')
                 }
             })
             
             .catch(() => console.log("erreur identifiant"))
         },
-
-        getUser(){
-            
-            axios.post('http://localhost:3000/api/auth/user/'+this.id, {
-                email: this.email,
-                password: this.password
-                },
-                {
-                headers: {
-                    'authorization': 'bearer ' + localStorage.getItem('token'),
-                }
-            })
-            .then((res) => {
-                console.log(res)
-                localStorage.setItem('userData', JSON.stringify(res.data))
-            })
-        },
+        /*
         hideModale(){
             this.$emit('unreveal')
         }
+        */
     }
 }
 </script>

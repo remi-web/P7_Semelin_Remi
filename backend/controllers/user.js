@@ -49,11 +49,12 @@ exports.login = (req, res) => {
 }
 
 exports.findOne = (req, res, next) =>{
-    db.User.findOne({ where:{ email: req.body.email }})
+    db.User.findOne({ where:{ id: req.params.id }})
         .then( user => {
-            if(!user){
-                return res.status(404).json({ error: 'Utilisateur non trouvé !'});
-            } 
+            // if(!user){
+                 res.status(200).json({ user});
+            }) 
+            /*
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if(!valid) {
@@ -61,8 +62,9 @@ exports.findOne = (req, res, next) =>{
                     }
                     res.status(200).json({ user })
                 })
-            })   
-    .catch( error => res.status(400).json({ message: "err req findOne" }))
+                */
+             
+        .catch( error => res.status(400).json({ message: "err req findOne" }))
 }
 
 exports.modify = (req, res) => {
