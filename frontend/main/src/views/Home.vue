@@ -13,7 +13,8 @@
           :imageUrl="article.imageUrl"
           :id="article.id"
           :userId="article.userId"
-          :pseudo="article.User.pseudo">
+          :pseudo="article.User.pseudo"
+          :bodyLength="article.bodyLength">
         </post> 
     
         <modale></modale>    
@@ -50,6 +51,7 @@ export default {
                     }
                 })
                 .then((response) => {
+                    console.log(response)
                     this.articles = response.data.articles;
                 })
         },

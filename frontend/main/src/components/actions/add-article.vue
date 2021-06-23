@@ -79,6 +79,8 @@ const axios= require ('axios');
     .add-article-button{
         margin-top: 5%;
         margin-bottom: 5%;
+        border: none;
+        opacity: 90%;
 
     }
     .text-area{

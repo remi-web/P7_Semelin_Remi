@@ -9,7 +9,7 @@
         @unreveal="hideModale()">
       </modale>
 
-    <button id="mes-infos">Mes infos</button>
+    <button class="mes-infos">Mes infos</button>
       <ul class="user-infos">
           <li class="attribute">Nom: <p class="name" >{{ lastName }}</p>
           </li>
@@ -21,7 +21,7 @@
           </li>
     </ul>
 
-    <button class="button-log" @click="displayLogout()" id="logout-button">Se déconnecter</button>
+    <button class="button-logout mes-infos" @click="displayLogout()" id="logout-button">Se déconnecter</button>
 
 
   </div>
@@ -107,13 +107,20 @@ export default {
     padding-top: 3%;
     background: #f1f1f1;
     opacity: 0.6;
-    width: 50%;
   }
-  #mes-infos{
+  .mes-infos{
     margin-top: 10%;
-    display: flex
+    display: flex;
+    opacity: 0.6;
+    border: solid 1px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
+    font-size: 1.2em;
   }
-  
+  .button-logout{
+    margin-left: 30%;
+    margin-top: 50%;
+  }
   .attribute{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;

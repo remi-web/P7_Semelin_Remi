@@ -1,7 +1,7 @@
 <template>
     <div id="logout">
         <p>Etes vous sur de vouloir vous déconnecter ?</p>
-        <button @click="logout()" class="button">OUI</button>
+        <button @click="logout()" class="button mesinfos">OUI</button>
     </div>
 </template>
 

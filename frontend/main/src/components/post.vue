@@ -20,21 +20,25 @@
             </modale>
 
             <article class="article">
-                <p class="txt-article"> {{ body }}{{id}}</p>
+                <p v-bind:class="{allText: text, textHidden: !text}"> {{ body }}</p>
+                <p  class="afficher-suite" v-if="this.textArticleIsLong" @click="displayAllText()">afficher la suite</p>
                 <img class="image-post" :src="this.imageUrl">  
             </article>
 
-            <div class="addComment-reactionType-bloc">
-                
-
-                <div class="reaction-type-bloc">
-                    <addReaction
-                        :articleId="this.id"
-                        @addedReaction="addedReaction">
-                    </addReaction>
-                    
-                </div>
+            <div>
+                <addReaction
+                    :articleId="this.id"
+                    @addedReaction="addedReaction">
+                </addReaction>
             </div>
+
+            <div>
+               <button class="comments-button reactions-button" 
+                    @click="getComments(); displayCommentaire()">{{ countComments }} commentaires</button> 
+               <button class="comments-button reactions-button" 
+                    @click="getReactions(); displayReaction()">{{ countReactions }} reactions</button>
+            </div>
+
             <div v-if="displayReactions">
                 <reactions class="reaction"
                     v-for="reaction in reactions" :key="reaction.id"
@@ -45,15 +49,6 @@
                 </reactions>
             </div>
 
-            
-            
-            <div>
-               <button class="comments-button reactions-button" 
-                    @click="getComments(); displayCommentaire()">{{ countComments }} commentaires</button> 
-               <button class="comments-button reactions-button" 
-                    @click="getReactions(); displayReaction()">{{ countReactions }} reactions</button>
-                
-            </div>
             <div v-if="displayComments">   
                <commentaire 
                     v-for="comment in comments" :key="comment.id"
@@ -63,10 +58,12 @@
                     :pseudo="comment.User.pseudo">                    
                 </commentaire>
             </div>
+
             <addComment 
                 :id="this.id"
                 @addedComment="addComment">
             </addComment>
+
         </main>
     </div> 
 </template>
@@ -100,7 +97,8 @@ import modale from '../components/modale'
             displayReactions: false,
             countComments: "",
             countReactions: "",
-            // name: ""
+            textArticleIsLong: false,
+            text: false
         }),
 
         props:{
@@ -123,11 +121,15 @@ import modale from '../components/modale'
                 type: String,
                 default: ""
             },
+            bodyLength:{
+                type: Number
+            }
         },
         methods: {
            
             scrollMenu(){
                 this.revealScrollMenu = !this.revealScrollMenu
+                console.log(this.bodyLenght)
             },
            
             displayModaleModify(){
@@ -158,8 +160,9 @@ import modale from '../components/modale'
 
             addComment(payload){
                 this.comments.push(payload.comment)
-                console.log(this.comments)
+                console.log(this.id)
                 this.getComments()
+                this.countComments++
             },
 
             getComments(){
@@ -198,8 +201,12 @@ import modale from '../components/modale'
 
             addedReaction(payload){
                 this.reactions.push(payload.reaction)
-                console.log(this.reactions)
+                console.log(this.id)
                 this.getReactions()
+                this.countReactions++
+            },
+            displayAllText(){
+                this.text= !this.text
             }
         },
 
@@ -224,6 +231,10 @@ import modale from '../components/modale'
             })
             .catch()
 
+             if(this.bodyLength > 180){
+                this.textArticleIsLong = true
+                console.log(this.bodyLength)
+            }
         }
 
         
@@ -272,8 +283,6 @@ import modale from '../components/modale'
     .comments-button{
         border: none;
     }
-   
-
     .user-post-access{
         position: relative;
         left: 90%;
@@ -291,9 +300,21 @@ import modale from '../components/modale'
         margin-left: 3%;
         
     }
-    .addComment-reactionType-bloc{
-        display: flex;
-        flex-direction: row-reverse;
+    
+    .textHidden{
+        height: 130px;
+        overflow-y:hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+        margin-top: 0;
+        margin-bottom: 0;
+        /* white-space:nowrap; */
+
     }
+    .allText{
+        height: 100%;
+    }
+   
+    
     
 </style>

@@ -60,7 +60,7 @@ const axios = require ('axios')
         width: 50%;
         margin-right: 0;
         margin-bottom: 5%;
-        margin-top: 2%;
+        margin-top: 6%;
         color:grey;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -72,7 +72,7 @@ const axios = require ('axios')
     }
     #button-send{
         background-image: url('../../assets/envoyer.svg');
-        width: 10%;
+        width: 9%;
         position: absolute;
     }
 

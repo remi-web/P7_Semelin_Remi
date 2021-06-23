@@ -1,8 +1,6 @@
 <template>
     <div class="baner">
-        <img id="logo" alt="Vue logo" src="../assets/icon-above.svg">
-    
-       
+        <!-- <img id="logo" alt="Vue logo" src="../assets/icon-above.svg"> -->
     </div>
 
 </template>
@@ -22,6 +20,7 @@
 
 
 <style>
+/*
     #logo{
         height: 20%;
         width: 10%;
@@ -29,11 +28,10 @@
         top: 0%;
         left: 5%;
     }
+    */
     #nav{
         display: flex;
         justify-content: space-evenly;
-        margin-left: 20%;
-        margin-right: 20%;
         border-radius: 8px;
         margin-bottom: 2%;
         margin-top: 2%; 

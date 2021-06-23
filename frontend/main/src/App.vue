@@ -42,7 +42,7 @@ export default {
     background-image: url('assets/icon.png');
     background-size:cover;
     background-repeat: no-repeat;
-    background-position: center;
+    /* background-position: center; */
     /* padding: 8%; */
   }
   #acceuil{
@@ -66,6 +66,7 @@ export default {
   color: #20355F;
   text-decoration: underline;
   }
+
   
 </style>
 

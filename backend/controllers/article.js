@@ -36,7 +36,7 @@ exports.create = async (req, res,file) => {
 
 exports.findAll = async(req, res) => {
     db.Article.findAll ({
-        attributes: [ 'body', 'id', 'userId', 'imageUrl'],
+        attributes: [ 'body', 'id', 'userId', 'imageUrl',[sequelize.fn('length', sequelize.col('body')), 'bodyLength']],
         include: [
             { model: db.reactions, attributes: [ 'reactionTypeId'] },
             { model: db.users, attributes: [ 'pseudo']}
@@ -50,7 +50,7 @@ exports.findAll = async(req, res) => {
 
 exports.findOne = async(req, res) => {
     db.Article.findAll({
-        attributes:  [ 'body','id', 'userId', 'imageUrl' ],
+        attributes:  [ 'body','id', 'userId', 'imageUrl', [sequelize.fn('length', sequelize.col('body')), 'bodyLength']],
         where:{ id: req.params.id },
         include: [
             // { model: db.comments, attributes: [ 'note', 'userId'] },
@@ -59,7 +59,6 @@ exports.findOne = async(req, res) => {
         ]
     })
         .then(article => res.status(200).json({ article }))
-        
         .catch(error => res.status(404).json({ error }))
 }
 

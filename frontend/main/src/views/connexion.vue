@@ -1,7 +1,7 @@
 <template>
-    <div class="container">abc
-        <button @click="displayLogin()" id="login-button">Connexion</button>ou
-        <button @click="displaySignup()" id="signup-button">Inscription</button>
+    <div class="container">
+        <button @click="displayLogin()" class="mes-infos login">Connexion</button>ou
+        <button @click="displaySignup()" class="mes-infos signup">Inscription</button>
         <modale class="modale" 
             :reveal="reveal" 
             :login="login" 
@@ -50,14 +50,9 @@ export default {
 <style>
 
   .container{
-    position: fixed;
-        top: 0%;
-        bottom: 0%;
-        left: 0%;
-        right: 0%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
   }
   #signup-button{
@@ -66,9 +61,12 @@ export default {
   #login-button{
       margin-right: 5%;
   }
+  .login{
+      margin-right: 10%;
+  }
+  .signup{
+      margin-left: 10%;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
 

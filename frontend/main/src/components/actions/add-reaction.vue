@@ -69,10 +69,10 @@ export default {
 
     .reactions-types-bloc{
         display: flex;
-        justify-content: space-between;
-        margin-left: -30%;
-        width: 105%;
+        justify-content: space-around;
+        word-wrap: none;
     }
+ 
     
   
 
