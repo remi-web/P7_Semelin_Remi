@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
        
-        models.ReactionsTypes.belongsTo(models.Reaction,{
-            foreignKey: "ractionTypeId"
+        models.ReactionsTypes.hasMany(models.Reaction,{
+            foreignKey: "id"
         })
     }
   };

@@ -23,7 +23,7 @@ exports.getReactions = async (req, res) => {
         where:{ articleId: article.id},
             include:[
                 { model: db.users, attributes: [ 'pseudo']},
-                { model: db.reactionsTypes, attributes: [ 'name']},
+                { model: db.reactionsTypes, attributes: [ 'name', 'id']},
             ],
             order: [['createdAt', 'DESC']]
         })
@@ -38,6 +38,14 @@ exports.getReactionsTypes = async(req, res) => {
     .then(reactionsTypes => res.status(200).json({ reactionsTypes }))                    
     .catch(error => res.status(404).json({ error }))
 
+},
+
+exports.getCountReactions = ( req, res) => {
+    db.Reaction.count({
+        where:{ articleId: req.params.id}
+    })
+    .then(countReactions => res.status(200).json({ countReactions }))                    
+    .catch(error => res.status(404).json({ error  }))
 }
 
 

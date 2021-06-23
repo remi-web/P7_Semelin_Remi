@@ -1,9 +1,9 @@
 <template>
     <div id="add-comment">
-        <div class="button-add"  @click="commentTextArea=true">Commenter</div>
+        <div class="add-comment-button"  @click="commentTextArea=!commentTextArea">Commenter</div>
             <template v-if="commentTextArea">
                 <textarea name="text-input" id="comment-text-area" cols="30" rows="2" v-model="note"></textarea>
-                <button id="button-send"  @click="addComment(); commentTextArea=false">SEND</button>
+                <img src="../../assets/envoyer.svg" id="button-send"  @click="addComment(); commentTextArea=false">
             </template>
     </div>
 </template>
@@ -41,10 +41,10 @@ const axios = require ('axios')
                 .then((response) => {
                     console.log(response)
                     if(response){
-                        this.$emit("addComment", {
+                        this.$emit("addedComment", {
                            comment: response.data.comment[0]
                         })
-                        this.$emit('unreveal')
+                        // this.$emit('unreveal')
                     }
                 })
             }
@@ -55,7 +55,7 @@ const axios = require ('axios')
 
 <style >
 
-    .button-add{
+    .add-comment-button{
         font-size: 0.8em;
         width: 50%;
         margin-right: 0;
@@ -66,6 +66,14 @@ const axios = require ('axios')
     }
     .button-add:hover{
         font-weight: bold;
+    }
+    #comment-text-area{
+        width: 80%;
+    }
+    #button-send{
+        background-image: url('../../assets/envoyer.svg');
+        width: 10%;
+        position: absolute;
     }
 
 

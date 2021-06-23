@@ -29,7 +29,7 @@ import modale from '../components/modale'
     export default {
         name: "Comment",
         components:{
-            /*deleteComment, modifyComment,*/ modale
+            modale
         },
 
         data: () => ({
@@ -110,13 +110,13 @@ import modale from '../components/modale'
         border-radius: 8px;
         padding: 2%;
         margin: 1.5%;
+        margin-top: 5%;
         background-color: rgb(243, 237, 237);
-        position: relative;
     }
     .user-comment-access{
         height: 50%;
         margin-left: 5%;
-        margin-top: 3%;
+        margin-top: 6%;
        
         
     }

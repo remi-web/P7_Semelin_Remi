@@ -67,3 +67,11 @@ exports.getComments = async ( req, res) => {
     .then(comments => res.status(200).json({ comments }))                    
     .catch(error => res.status(404).json({ error  }))
 }
+
+exports.getCountComments = ( req, res) => {
+    db.Comment.count({
+        where:{ articleId: req.params.id}
+    })
+    .then(countComments => res.status(200).json({ countComments }))                    
+    .catch(error => res.status(404).json({ error  }))
+}

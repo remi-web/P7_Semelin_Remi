@@ -23,8 +23,6 @@ export default {
 
     data: () => ({
         reactionsTypes: [],
-        
-        
     }),
 
     props: {
@@ -37,7 +35,7 @@ export default {
     methods: {
         addedReaction(payload){
             axios.post('http://localhost:3000/api/articles/'+this.articleId+'/reactions', {
-                reaction: payload.typeid
+                reaction: payload.typeId
             },
             {
                 headers:{
@@ -46,6 +44,9 @@ export default {
             })
             .then((response) => {
                 console.log(response)
+                this.$emit('addedReaction', {
+                    reaction: response.data.reactions
+                })
             })
         }
     },
@@ -69,10 +70,10 @@ export default {
     .reactions-types-bloc{
         display: flex;
         justify-content: space-between;
-        margin-left: 40%;
+        margin-left: -30%;
+        width: 105%;
     }
-    .deux{
-        background: red;
-    }
+    
+  
 
 </style>

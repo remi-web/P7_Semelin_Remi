@@ -89,7 +89,7 @@ const axios= require ('axios');
     .file-insert-button{
         margin-top: 2%
     }
-    .button{
+    .file-insert-button{
         border-radius: 8px;
     }
     .send-article-button{

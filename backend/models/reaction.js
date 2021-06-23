@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         models.Reaction.belongsTo(models.User,{
             foreignKey: "userId"
         })
-        models.Reaction.hasMany(models.ReactionsTypes,{
-          foreignKey: "reactionId"
+        models.Reaction.belongsTo(models.ReactionsTypes,{
+          foreignKey: "reactionTypeId"
         })
     }
   };
