@@ -11,6 +11,7 @@ router.post('/signup', userCtrl.signup);
 router.post('/login',  userCtrl.login);
 router.get('/user/:id', authUserAcces, userCtrl.findOne)
 router.put('/user/:id', authUserAcces, userCtrl.modify)
+router.delete('/user/:id', userCtrl.delete)
 
 module.exports = router
 

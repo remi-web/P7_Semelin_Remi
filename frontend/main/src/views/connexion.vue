@@ -1,12 +1,13 @@
 <template>
-    <div class="container">
-        <button @click="displayLogin()" class="mes-infos login">Connexion</button>ou
-        <button @click="displaySignup()" class="mes-infos signup">Inscription</button>
+    <div>
+        <button @click="displayLogin()" class="login signup">Connexion</button>ou
+        <button @click="displaySignup()" class="signup login">Inscription</button>
         <modale class="modale" 
             :reveal="reveal" 
             :login="login" 
             :signup="signup" 
-            @unreveal="hideModale()"></modale>
+            @unreveal="hideModale()"
+            @undisplay="undisplay()"></modale>
     </div>
    
 </template>
@@ -42,6 +43,9 @@ export default {
         displaySignup(){
             this.reveal = !this.reveal
             this.signup = true
+        },
+        undisplay(){
+            this.login = false
         }
     }
 }
@@ -49,23 +53,17 @@ export default {
 
 <style>
 
-  .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  #signup-button{
-      width: 10%;
-  }
-  #login-button{
-      margin-right: 5%;
-  }
   .login{
       margin-right: 10%;
+      opacity: 0.6;
+    /* border: solid 1px; */
+    /* border-radius: 4px; */
+    box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
+    font-size: 1.2em;
   }
   .signup{
       margin-left: 10%;
+      
   }
 
 </style>

@@ -82,6 +82,26 @@ exports.modify = (req, res) => {
     .catch( error => res.status(404).json({ error }))
 }
 
+exports.delete = (req, res) => {
+    db.User.findAll({ where:{email: req.body.email}})
+        .then(user => {
+            if(!user){
+                return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+            } 
+        bcrypt.compare(req.body.password, user.password)
+            .then(valid => {
+                if(!valid) {
+                    return res.status(401).json({ error: 'Mot de passe incorrect !'});
+                }
+                else{
+                    db.User.destroy({ where:{ id: req.params.id }})
+                        .then(() => res.status(200).json({ message: " utilisateur supprimé"}))
+                        .catch(err => res.status(404).json({message: "erreur suppression"}))
+                }
+            })
+        })
+}
+
 
 
 

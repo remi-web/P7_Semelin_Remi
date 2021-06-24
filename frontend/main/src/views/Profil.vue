@@ -5,24 +5,28 @@
     <modale
         :reveal="reveal" 
         :logout="logout" 
-        :login="login" 
-        @unreveal="hideModale()">
+        :userId="this.id"
+        :userModification="userModify"
+        :userSuppr="userDelete"
+        @unreveal="hideModale()"
+        @undisplay="undisplay()">
       </modale>
 
-    <button class="mes-infos">Mes infos</button>
+      <div class="mes-infos">
+          <button class="button-logout mes-infos"  @click="displayUserModify()">modifier mes informations</button>
+          <button class="button-logout mes-infos"  @click="displayUserDelete()">supprimer mon compte</button>
+      </div>
+
       <ul class="user-infos">
-          <li class="attribute">Nom: <p class="name" >{{ lastName }}</p>
-          </li>
-          <li class="attribute">Prenom: <p class="name" >{{ firstName }}</p>  
-          </li>
-          <li class="attribute">email: <p class="name" >{{ email }}</p>
-          </li>
-          <li class="attribute">pseudo: <p class="name" >{{ pseudo }}</p>
-          </li>
-    </ul>
+          <p class="name" >Nom</p><li class="attribute">{{ lastName }}</li>
+          <p class="name" >Prenom</p><li class="attribute">{{ firstName }}</li>
+          <p class="name" >email</p><li class="attribute">{{ email }}</li>
+          <p class="name" >pseudo</p><li class="attribute">{{ pseudo }}</li>
+      </ul>
 
-    <button class="button-logout mes-infos" @click="displayLogout()" id="logout-button">Se déconnecter</button>
-
+      <div class="mes-infos">
+          <button class="button-logout" @click="displayLogout()">se déconnecter</button>
+      </div>
 
   </div>
 </template>
@@ -43,14 +47,16 @@ export default {
 
     data:() => ({
         reveal: false,
-        login: false,
+        // login: false,
         logout: false,
         id: localStorage.getItem('userId'),
         firstName:"",
         lastName: "",
         pseudo: "",
         email: "",
-        userPassword: ""
+        userPassword: "",
+        userModify: false,
+        userDelete: false
     }),
 
     methods:{
@@ -58,19 +64,25 @@ export default {
         displayLogout(){
             this.reveal = true
             this.logout = true
+        }, 
+        displayUserModify(){
+          console.log(this.id)
+            this.reveal = true
+            this.userModify = true
+        },
+        displayUserDelete(){
+            this.reveal = true
+            this.userDelete = true
+        },
+        undisplay(){
+          // this.reveal = false
+          this.logout = false
+          this.userModify = false
+          this.userDelete = false
         },
         hideModale(){
-            this.reveal = false
-            this.login = false
-            this.logout = false
-            this.userInfoAccess = false
-            console.log(this.firstName)
-        },
-        displayLogin(){
-            this.reveal = !this.reveal
-            this.login = true
-            // console.log(this.userInfoAccess)
-        },
+          this.reveal = false
+        }
         
     },
     beforeMount(){
@@ -93,46 +105,53 @@ export default {
 
 <style>
 
+
   .button-log{
     margin-top: 10%;
 
   }
   .user-infos{
-    border: solid 1px;
-    border-radius: 8px;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 3%;
-    background: #f1f1f1;
-    opacity: 0.6;
-  }
-  .mes-infos{
-    margin-top: 10%;
-    display: flex;
-    opacity: 0.6;
-    border: solid 1px;
-    border-radius: 4px;
-    box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
-    font-size: 1.2em;
-  }
+  } 
   .button-logout{
-    margin-left: 30%;
-    margin-top: 50%;
+    /* margin-left: 30%; */
+    padding: 4%;
+    margin-top: 20%;
+    background: rgba(250, 43, 43, 0.116);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    color: rgba(10, 8, 114, 0.521);
+    box-shadow: 1px 1px 10px -3px gray;
+  }
+   .mes-infos{
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 2%;
+    font-size: 1em;
   }
   .attribute{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
-    border: solid 1px;
-    border-radius: 8px;
+    justify-content: center;
+    border: none;
+    /* border-radius: 8px; */
     width: 70%;
     margin-bottom: 3%;
-    /* box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset; */
-    box-shadow: -1px 0px 4px 0px gray
+    padding: 2%;
+    box-shadow: -1px 0px 4px 0px gray;
+    /* background: rgba(248, 2, 2, 0.089); */
+
   }
   .name{
-    margin-left: 20%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:rgb(94, 93, 93);
   }
 
 </style>

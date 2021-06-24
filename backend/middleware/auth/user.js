@@ -5,10 +5,7 @@ const bcrypt = require ('bcrypt');
 
 module.exports = async ( req, res, next) => {
 
-
-
     try {  
-        
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         const userId = decodedToken.userId;
@@ -27,7 +24,6 @@ module.exports = async ( req, res, next) => {
     catch {
         res.status(400).json({ message: "Requete invalide"})
     }
-    
 }
 
 

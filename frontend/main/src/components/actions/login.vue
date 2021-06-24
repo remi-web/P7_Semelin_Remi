@@ -60,10 +60,15 @@ export default {
                 localStorage.setItem('userId', res.data.userId)
                 this.$router.push('home')
                 this.$emit('unreveal')
+                this.$router.reload()
                 }
             })
             
-            .catch(() => console.log("erreur identifiant"))
+            .catch(() => {
+                console.log("erreur identifiant")
+                this.$emit('unauthorized')
+
+            })
         },
         /*
         hideModale(){

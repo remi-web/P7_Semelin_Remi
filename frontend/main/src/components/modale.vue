@@ -5,11 +5,10 @@
             <button @click="hideModale()"  class="button-close">X</button>
 
             <div v-if="login">
-                <login 
-                    :loginButton="!userInfoAccess" 
+                <login
+                    @unauthorized="unauthorized()" 
                     @unreveal="hideModale()">
                 </login>
-                
             </div>
 
             <div v-else-if="signup">  
@@ -56,6 +55,22 @@
                     @authorized="authorized()">
                 </deleteComment>
             </div>
+
+            <div v-if="userModification">
+                <userModify
+                    :id='this.userId'
+                    @undisplay="undisplay()"
+                    @modified="authorized()">
+                </userModify>
+            </div>
+
+            <div v-if="userSuppr">
+                <userDelete
+                    :id='this.userId'
+                    @undisplay="undisplay()"
+                    @deleted="authorized()">
+                </userDelete>
+            </div>
            
             
         </div>
@@ -71,6 +86,8 @@ import modifyArticle from './actions/modify-article'
 import deleteArticle from './actions/delete-article'
 import modifyComment from './actions/modify-comment'
 import deleteComment from './actions/delete-comment'
+import userModify from './actions/user-modify'
+import userDelete from './actions/user-delete'
 
 
 
@@ -79,7 +96,7 @@ export default {
     name: "modale",
     components: {
         login, signup, logout, modifyArticle, deleteArticle,
-        modifyComment, deleteComment
+        modifyComment, deleteComment, userModify, userDelete
     },
 
     data: () => ({
@@ -131,19 +148,28 @@ export default {
         commentId:{
             type: Number
         } ,
-        userInfoAccess:{
+        userModification:{
             type: Boolean,
             default: false
-        }  
+        },
+        userSuppr:{
+            type: Boolean,
+            default: false
+        },
+        userId:{
+            type: String
+        }
+
     },
 
     methods:{
         
         hideModale(){
             this.$emit('unreveal')
-            console.log(this.userInfoAccess)
         },
-
+        undisplay(){
+            this.$emit('undisplay')    
+        },
         unauthorized(){
             this.message = "Accès non authorisé"
             this.$emit('undisplay')
@@ -163,6 +189,12 @@ export default {
             else if(this.deleteCommentaire){
                 this.message = "Commentaire supprimé"
             }
+            else if(this.userModification){
+                this.message = "modifications enregistrées"
+            }
+            else if(this.userSuppr){
+                this.message = "votre compte a été supprimé"
+            }
             this.$emit('undisplay')
             this.displayMessage = true
         },
@@ -173,9 +205,11 @@ export default {
         connexion(){
             this.$emit('connexion')
         },
+        /*
         confirm(){
             this.$emit('confirm')
         }
+        */
         
     }
 }

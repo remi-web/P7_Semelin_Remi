@@ -22,7 +22,7 @@
                     <label for="name"></label>
                     <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
                 </div>
-                <button id="signup-button" @click.prevent.stop="signup">SIGNUP</button>
+                <button id="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
         </main>
 
         </form>

@@ -153,7 +153,7 @@ import modale from '../components/modale'
                 this.revealScrollMenu = false
             },
 
-             //hide validate modifyArticle message   
+             //hide modifyArticle message   
             undisplay(){
                 this.modifyArticle = false
             },
@@ -181,8 +181,7 @@ import modale from '../components/modale'
                 this.displayComments = !this.displayComments
             },
 
-            getReactions(){
-                axios.get('http://localhost:3000/api/articles/'+this.id+'/reactions', {
+            getReactions(){                axios.get('http://localhost:3000/api/articles/'+this.id+'/reactions', {
             
                     headers: {
                         'authorization': 'bearer ' + localStorage.getItem('token')
@@ -243,12 +242,13 @@ import modale from '../components/modale'
 
 <style>
     #posts{
-        width: 100%;
+        /* width: 100%; */
         margin: auto;
         font-size: 1.2em;
         padding-bottom: 15%;
         position: relative;
         border-bottom: solid 1px gray;
+        background-color: rgb(252, 252, 252) ;
     }
     .article{
         border-style: groove;
@@ -282,6 +282,7 @@ import modale from '../components/modale'
     }
     .comments-button{
         border: none;
+        background: white;
     }
     .user-post-access{
         position: relative;
