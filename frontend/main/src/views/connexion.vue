@@ -5,7 +5,8 @@
         <modale class="modale" 
             :reveal="reveal" 
             :login="login" 
-            :signup="signup" 
+            :signup="signup"
+            @isConnected="hideWelcome()" 
             @unreveal="hideModale()"
             @undisplay="undisplay()"></modale>
     </div>
@@ -46,6 +47,9 @@ export default {
         },
         undisplay(){
             this.login = false
+        },
+        hideWelcome(){
+            this.$emit('hideWelcome')
         }
     }
 }

@@ -14,7 +14,8 @@
           :id="article.id"
           :userId="article.userId"
           :pseudo="article.User.pseudo"
-          :bodyLength="article.bodyLength">
+          :bodyLength="article.bodyLength"
+          @getArticles="getArticles()">
         </post> 
     
         <modale></modale>    

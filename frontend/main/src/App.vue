@@ -4,11 +4,10 @@
     
      <div id="nav">
         <router-link class="baner-txt" to="/home">home</router-link>
-        <router-link class="baner-txt" to="/messagerie">messagerie</router-link>
         <router-link class="baner-txt" to="/profil">profil</router-link>
       </div>
 
-      <div id="welcome-message" v-if="!isConnected">
+      <div id="welcome-message" v-if="welcome && !isConnected">
         <p  id="welcome">Bienvenue</p>
       </div>
 
@@ -16,7 +15,7 @@
 
     <router-view/>
    
-    <connexion id="connexion"  v-if="!isConnected"></connexion>
+    <connexion id="connexion"  v-if="welcome && !isConnected" @hideWelcome="hideWelcome()"></connexion>
 
   </div>
 </template>
@@ -30,6 +29,16 @@ export default {
      connexion,
   },
 
+  data: () => ({
+    welcome: true
+  }),
+
+  methods:{
+    hideWelcome(){
+      this.welcome= false
+    }
+  },
+
   computed: {
        isConnected(){
             if(localStorage.token){
@@ -40,8 +49,6 @@ export default {
   },
 }
 </script>
-
-
 
 <style>
  

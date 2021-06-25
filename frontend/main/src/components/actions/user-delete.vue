@@ -11,7 +11,7 @@
                 <label for="name"></label>
                 <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
             </div>
-            <button id="signup-button" @click="suppr()">SUPPRIMER</button>
+            <button id="signup-button" v-if="this.email && this.password"  @click="suppr()">SUPPRIMER</button>
         </div>
     </div>
 </template>
@@ -24,8 +24,8 @@ export default {
     name:"userDelete",
 
     data:() => ({
-        email:"",
-        password:""
+        email: null,
+        password: null
     }),
 
     props:{
@@ -35,26 +35,34 @@ export default {
     },
 
     methods: {
+        
         suppr(){
-            axios.delete('http://localhost:3000/api/auth/user/'+this.id , {
-
+            axios.post('http://localhost:3000/api/auth/user', {
                 email: this.email,
-                password: this.password,
-            },
-            {
-                headers: 
-                    {
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
+                password: this.password
             })
             .then(res => {
-                console.log(res)
-                this.$emit('undisplay')
-                this.$emit('deleted')
+                console.log(res.status)
+                
+                    axios.delete('http://localhost:3000/api/auth/user/'+this.id+'' , {
+                    headers: 
+                        {Authorization: 'Bearer ' + localStorage.getItem('token')}            
+                    })
+                    .then(() => {
+                        localStorage.removeItem('token')
+                        localStorage.removeItem('userId')
+                        this.$emit('undisplay')
+                        this.$emit('deleted')
+                        
+                        
+                    })
+            })                
+            .catch(() => {
+                // this.$emit('undisplay')
+                this.$emit('unauthorized')
             })
-            .catch(() => console.log("erreur requete"))
-
-        }
+        }   
+        
     }
 }
 </script>

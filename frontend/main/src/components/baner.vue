@@ -1,10 +1,8 @@
 <template>
     <div class="baner">
-        <!-- <img id="logo" alt="Vue logo" src="../assets/icon-above.svg"> -->
     </div>
 
 </template>
-
 
 <script>
     export default {
@@ -17,18 +15,8 @@
     }
 </script>
 
-
-
 <style>
-/*
-    #logo{
-        height: 20%;
-        width: 10%;
-        position: absolute;
-        top: 0%;
-        left: 5%;
-    }
-    */
+
     #nav{
         display: flex;
         justify-content: space-evenly;

@@ -15,6 +15,8 @@
                 :modifyArticle="this.modifyArticle" 
                 :deleteArticle="this.deleteArticle"
                 :id="this.id"
+                @getArticles="getArticles()"
+                @getComments="getComments()"
                 @unreveal="hideModale()"
                 @undisplay="undisplay()">
             </modale>
@@ -156,6 +158,9 @@ import modale from '../components/modale'
              //hide modifyArticle message   
             undisplay(){
                 this.modifyArticle = false
+            },
+            getArticles(){
+                this.$emit('getArticles')
             },
 
             addComment(payload){

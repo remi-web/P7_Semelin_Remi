@@ -21,6 +21,7 @@
                     <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
                 </div>
                 <button id="signup-button" @click="modify()">MODIFIER</button>
+                <p id="email-message" v-if="emailMessage">email non disponible</p>
     </div>
 </template>
 
@@ -36,7 +37,8 @@ export default {
         lastName:"",
         email:"",
         pseudo:"",
-        password:""
+        password:"",
+        emailMessage: false
         
     }),
 
@@ -66,8 +68,12 @@ export default {
                 console.log(res)
                 this.$emit('undisplay')
                 this.$emit('modified')
+                document.location.reload()
             })
-            .catch(() => console.log("erreur modification"))
+            .catch(() => {
+                this.emailMessage = true
+                console.log("erreur modification")
+            })
 
         }
     }

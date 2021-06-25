@@ -82,6 +82,8 @@ export default {
         },
         hideModale(){
           this.reveal = false
+          this.userModify = false
+          this.userDelete = false
         }
         
     },

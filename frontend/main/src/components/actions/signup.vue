@@ -22,7 +22,9 @@
                     <label for="name"></label>
                     <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
                 </div>
+                
                 <button id="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
+                <p id="email-message" v-if="emailMessage">email déjà enregistré</p>
         </main>
 
         </form>
@@ -41,7 +43,8 @@ export default {
         lastName:"",
         email:"",
         pseudo:"",
-        password:""
+        password:"",
+        emailMessage: false
         
     }),
 
@@ -65,14 +68,19 @@ export default {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('userId', res.data.userId)
                         this.$router.push('home')
+                        this.$emit('unreveal')
+                        this.$emit('isConnected')
                         }
                     })
                 })
-                .catch(() => console.log("erreur de connexion"))
-                
-            
-            .catch(() => console.log("erreur inscription"))
+                .catch(() =>{
+                    this.emailMessage = true 
+                    console.log("erreur de connexion")
+                })
 
+            .catch(() => {
+                console.log("erreur inscription")
+            })
         }
     }
 }

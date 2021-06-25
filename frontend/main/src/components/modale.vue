@@ -6,13 +6,17 @@
 
             <div v-if="login">
                 <login
+                    @isConnected="isConnected()"
                     @unauthorized="unauthorized()" 
                     @unreveal="hideModale()">
                 </login>
             </div>
 
             <div v-else-if="signup">  
-                <signup></signup>
+                <signup
+                    @isConnected="isConnected()"
+                    @unreveal="hideModale()">
+                </signup>
             </div>
 
             <div v-else-if="logout">  
@@ -28,7 +32,7 @@
             </div>
             <div v-else-if="displayMessage">
                     {{ message }}
-                    <button class="confirm-button" @click="hideModale(); reload()">OK</button>
+                    <button class="confirm-button" @click="hideModale()">OK</button>
             </div>
 
             <div v-else-if="deleteArticle">
@@ -59,7 +63,6 @@
             <div v-if="userModification">
                 <userModify
                     :id='this.userId'
-                    @undisplay="undisplay()"
                     @modified="authorized()">
                 </userModify>
             </div>
@@ -67,7 +70,7 @@
             <div v-if="userSuppr">
                 <userDelete
                     :id='this.userId'
-                    @undisplay="undisplay()"
+                    @unauthorized="unauthorized()"
                     @deleted="authorized()">
                 </userDelete>
             </div>
@@ -167,9 +170,7 @@ export default {
         hideModale(){
             this.$emit('unreveal')
         },
-        undisplay(){
-            this.$emit('undisplay')    
-        },
+       
         unauthorized(){
             this.message = "Accès non authorisé"
             this.$emit('undisplay')
@@ -177,6 +178,11 @@ export default {
         },
 
         authorized(){
+            this.$emit('undisplay')
+            this.displayMessage = true
+            this.$emit('getArticles')
+            this.$emit('getComments')
+
             if(this.modifyArticle){
                 this.message = "Article modifé"
             }
@@ -194,9 +200,7 @@ export default {
             }
             else if(this.userSuppr){
                 this.message = "votre compte a été supprimé"
-            }
-            this.$emit('undisplay')
-            this.displayMessage = true
+            }            
         },
         
         reload(){
@@ -205,12 +209,9 @@ export default {
         connexion(){
             this.$emit('connexion')
         },
-        /*
-        confirm(){
-            this.$emit('confirm')
-        }
-        */
-        
+        isConnected(){
+            this.$emit('isConnected')
+        },
     }
 }
 </script>

@@ -60,7 +60,8 @@ export default {
                 localStorage.setItem('userId', res.data.userId)
                 this.$router.push('home')
                 this.$emit('unreveal')
-                this.$router.reload()
+                this.$emit('isConnected')
+                // this.$router.reload()
                 }
             })
             
