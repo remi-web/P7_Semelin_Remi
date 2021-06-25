@@ -56,7 +56,6 @@ export default {
                 email: this.email,
                 pseudo: this.pseudo,
                 password: this.password,
-                //roleId: 1
             },
             {
                 headers: 
@@ -68,7 +67,7 @@ export default {
                 console.log(res)
                 this.$emit('undisplay')
                 this.$emit('modified')
-                document.location.reload()
+                this.$emit('getUserInfos')
             })
             .catch(() => {
                 this.emailMessage = true

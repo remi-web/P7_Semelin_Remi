@@ -12,7 +12,7 @@
                 </div>
                 <div class="input">
                     <label for="mail"></label>
-                    <input type="email" class="email" name="email" placeholder="e-mail" v-model="email">
+                    <input type="email" class="email" name="email"  placeholder="e-mail" v-model="email" required>
                 </div>
                 <div class="input">
                     <label for="name"></label>
@@ -24,7 +24,7 @@
                 </div>
                 
                 <button id="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
-                <p id="email-message" v-if="emailMessage">email déjà enregistré</p>
+                <p id="email-message" v-if="emailMessage">email invalide ou dejà enregistré</p>
         </main>
 
         </form>

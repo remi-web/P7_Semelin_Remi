@@ -3,23 +3,36 @@ const db = require("../models/index");
 const jwt = require('jsonwebtoken');
 const bcrypt = require ('bcrypt');
 
+const validator = require("email-validator")
+const inputValidate = require('../models/password-validator')
+const passwordValidate = inputValidate.passWordValidator
+
 exports.signup = async (req, res, next) => {
-    bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-            const user = ({
-                firstName: req.body.firstName,
-                email: req.body.email,
-                lastName: req.body.lastName,
-                pseudo: req.body.pseudo,
-                password: hash,
-                roleId: 1
-            });
-            db.User.create(user)
-                .then(user => res.status(201).json({message: "utilisateur créé"}))
-                .catch(error => res.status (400).json({ error }))
-        })
-    .catch(error => res.status(500).json({ message: "signup error" }))
+
+    let passwordValidate = passwordValidate.validate(req.body.password)
+    let emailValidate = validator.validate(req.body.email)
+
+    if ((emailValidate)  &&  (passwordValidate === true)){
+        bcrypt
+            .hash(req.body.password, 10)
+            .then((hash) => {
+                const user = ({
+                    firstName: req.body.firstName,
+                    email: req.body.email,
+                    lastName: req.body.lastName,
+                    pseudo: req.body.pseudo,
+                    password: hash,
+                    roleId: 1
+                })
+                db.User.create(user)
+                    .then(user => res.status(201).json({message: "utilisateur créé"}))
+                    .catch(error => res.status (400).json({ error }))
+            })
+        .catch(error => res.status(500).json({ message: "signup error" }))
+    }
+    else{
+        return res.status(400).json({ message: "email error" })
+    }
 }
 
 exports.login = (req, res) => {

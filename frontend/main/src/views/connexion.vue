@@ -57,18 +57,16 @@ export default {
 
 <style>
 
-  .login{
-      margin-right: 10%;
-      opacity: 0.6;
-    /* border: solid 1px; */
-    /* border-radius: 4px; */
-    box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
-    font-size: 1.2em;
-  }
-  .signup{
-      margin-left: 10%;
-      
-  }
+    .login{
+        margin-right: 10%;
+        opacity: 0.6;
+        box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
+            font-size: 1.2em;
+    }
+    .signup{
+        margin-left: 10%;
+        
+    }
 
 </style>
 

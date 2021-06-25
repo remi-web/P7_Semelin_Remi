@@ -9,7 +9,8 @@
         :userModification="userModify"
         :userSuppr="userDelete"
         @unreveal="hideModale()"
-        @undisplay="undisplay()">
+        @undisplay="undisplay()"
+        @getUserInfos="getUserInfos()">
       </modale>
 
       <div class="mes-infos">
@@ -61,47 +62,55 @@ export default {
 
     methods:{
 
-        displayLogout(){
+        displayLogout(){  //display message in modale
             this.reveal = true
             this.logout = true
-        }, 
-        displayUserModify(){
+        },
+
+        displayUserModify(){  
           console.log(this.id)
             this.reveal = true
             this.userModify = true
         },
-        displayUserDelete(){
+
+        displayUserDelete(){  
             this.reveal = true
             this.userDelete = true
         },
-        undisplay(){
-          // this.reveal = false
+        
+        undisplay(){      // undisplay message in modale
           this.logout = false
           this.userModify = false
           this.userDelete = false
         },
+
         hideModale(){
+          this.undisplay()
           this.reveal = false
-          this.userModify = false
-          this.userDelete = false
+        },
+
+        getUserInfos(){
+            axios.get('http://localhost:3000/api/auth/user/'+this.id, {
+                
+                  headers: {
+                      'authorization': 'bearer ' + localStorage.getItem('token'),
+                  }
+              })
+              .then((user) => {
+                  console.log(user)
+                  this.firstName = user.data.user.firstName,
+                  this.lastName = user.data.user.lastName,
+                  this.pseudo = user.data.user.pseudo,
+                  this.email = user.data.user.email
+              })
         }
         
     },
+    
     beforeMount(){
-            axios.get('http://localhost:3000/api/auth/user/'+this.id, {
-              
-                headers: {
-                    'authorization': 'bearer ' + localStorage.getItem('token'),
-                }
-            })
-            .then((user) => {
-                console.log(user)
-                this.firstName = user.data.user.firstName,
-                this.lastName = user.data.user.lastName,
-                this.pseudo = user.data.user.pseudo,
-                this.email = user.data.user.email
-            })
+            this.getUserInfos()
       },
+      
 }
 </script>
 

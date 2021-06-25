@@ -30,6 +30,7 @@
                     @authorized="authorized()">
                 </modifyArticle>
             </div>
+            
             <div v-else-if="displayMessage">
                     {{ message }}
                     <button class="confirm-button" @click="hideModale()">OK</button>
@@ -63,7 +64,8 @@
             <div v-if="userModification">
                 <userModify
                     :id='this.userId'
-                    @modified="authorized()">
+                    @modified="authorized()"
+                    @getUserInfos="getUserInfos()">
                 </userModify>
             </div>
 
@@ -169,6 +171,8 @@ export default {
         
         hideModale(){
             this.$emit('unreveal')
+            this.$emit('undisplay')
+            this.displayMessage = false
         },
        
         unauthorized(){
@@ -209,9 +213,14 @@ export default {
         connexion(){
             this.$emit('connexion')
         },
+        
         isConnected(){
             this.$emit('isConnected')
         },
+        
+       getUserInfos(){
+           this.$emit('getUserInfos')
+       }
     }
 }
 </script>
