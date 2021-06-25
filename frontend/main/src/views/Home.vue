@@ -75,8 +75,6 @@ export default {
 
     #home{       
         background-color: #f1f1f1;
-        /* margin-left: 20%; */
-        /* margin-right: 20%; */
         margin-top: 5%;
         border-radius: 8px;
         z-index: -1;

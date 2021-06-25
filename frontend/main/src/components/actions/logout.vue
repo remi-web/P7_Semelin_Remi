@@ -1,7 +1,7 @@
 <template>
     <div id="logout">
         <p>Etes vous sur de vouloir vous déconnecter ?</p>
-        <button @click="logout()" class="button mesinfos">OUI</button>
+        <button @click="logout()" class="signup-button logout-button">OUI</button>
     </div>
 </template>
 
@@ -28,3 +28,12 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+    .logout-button{
+        width: 50%;
+        margin-left: 25%;
+    }
+
+</style>

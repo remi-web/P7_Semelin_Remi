@@ -1,7 +1,7 @@
 <template>
     <div class="bloc-modale" v-if="reveal">
         <div class="overlay" @click="hideModale()"></div>
-        <div class="modale cart">
+        <div class="modale">
             <button @click="hideModale()"  class="button-close">X</button>
 
             <div v-if="displayMessage">
@@ -226,6 +226,8 @@ export default {
 </script>
 
 <style>
+
+    
     .bloc-modale{
         position: fixed;
         top: 0%;
@@ -236,7 +238,6 @@ export default {
         justify-content: center;
         align-items: center;
         z-index: 1;
-        
     }
 
     .overlay{
@@ -252,7 +253,7 @@ export default {
     .modale{
         background: #f1f1f1;
         color: #333;
-        padding: 50px;
+        padding: 10%;
         position: fixed;
         border-radius: 8px;
 

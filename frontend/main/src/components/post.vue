@@ -6,8 +6,8 @@
             <button class="user-post-access" @click="scrollMenu()">...</button>
 
             <div id="modify-section" v-if="revealScrollMenu">
-                <button class="button modify" @click="displayModaleModify(); hideScrollMenu()">modifier</button>
-                <button class="button delete" @click="displayModaleDelete(); hideScrollMenu()">supprimer</button>                
+                <button class="signup-button modify" @click="displayModaleModify(); hideScrollMenu()">modifier</button>
+                <button class="signup-button modify" @click="displayModaleDelete(); hideScrollMenu()">supprimer</button>                
             </div>
 
             <modale 
@@ -271,24 +271,29 @@ import modale from '../components/modale'
         left: 75%;
         display: flex;
         flex-direction: column;
-        border: solid 1px #20355F;
-        background: gray
+    }
+
+    .modify{
+        background: rgba(255, 151, 151, 0.788);
+        font-size: 1.3em;
+        margin-right: 10px;
     }
     
     .button:hover{
         background: rgb(252, 185, 185);
     }
+    /*
     .button{
         border: none;
         opacity: 80%;
     }
-    .delete{
-        border-top: solid 1px #20355F;
-    }
+    
+*/
     .comments-button{
         border: none;
         background: white;
     }
+    
     .user-post-access{
         position: relative;
         left: 90%;

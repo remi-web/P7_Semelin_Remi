@@ -1,9 +1,9 @@
 <template>
    <div id="add-article">
-       <button class="add-article-button" @click="articleTextArea()">Publier un article</button>
+       <button class="signup-button add-article-button" @click="articleTextArea()">Publier un article</button>
 
        <template v-if="addArticle">
-            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="5" v-model="body">
+            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="8" v-model="body">
                 
             </textarea>
             <input class="file-insert-button button" type="file"  name="image" ref="image" accept="image/png, image/jpeg" v-on:change="value()">

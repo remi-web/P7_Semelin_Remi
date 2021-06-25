@@ -1,7 +1,7 @@
 <template>
    <div>
-            <p>Etes vous sûr de vouloir supprimer cet article ?</p>
-            <button class="confirm-button"  @click="deleteArticle()">DELETE</button>
+            <p class="text-infos">Etes vous sûr de vouloir supprimer cet article ?</p>
+            <button class="confirm-button signup-button"  @click="deleteArticle()">DELETE</button>
        
    </div>
 </template>

@@ -3,7 +3,7 @@
         <form>
         <main class="form">
 
-            <div id="text-infos">
+            <div class="text-infos">
                 <p id="veuillez">Veuillez renseigner le formulaire</p><br>
                 <p id="password-infos">le mot de passe doit contenir au moins 8 caractères, 1 majuscule et 1 chiffre</p>
             </div>
@@ -122,7 +122,7 @@ export default {
     
     
     }
-    #text-infos{
+    .text-infos{
         display: flex;
         flex-direction: column;
         align-items: center;

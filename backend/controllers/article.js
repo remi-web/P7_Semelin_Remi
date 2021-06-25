@@ -39,11 +39,12 @@ exports.findAll = async(req, res) => {
         attributes: [ 'body', 'id', 'userId', 'imageUrl',[sequelize.fn('length', sequelize.col('body')), 'bodyLength']],
         include: [
             { model: db.reactions, attributes: [ 'reactionTypeId'] },
-            { model: db.users, attributes: [ 'pseudo']}
+            { model: db.users, attributes: ['pseudo']}
         ],
         order: [['createdAt', 'DESC']]
     })
-    .then( articles => res.status(200).json({articles}))
+    .then( articles => {
+        res.status(200).json({articles})})
     .catch(error => res.status (404).json((error))
         )
 }

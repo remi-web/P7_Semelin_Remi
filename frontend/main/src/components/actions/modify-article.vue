@@ -1,7 +1,7 @@
 <template>
     <div id="add-comment">
-        <textarea name="text-input" id="comment-text-area" cols="30" rows="20" v-model="body"></textarea>
-        <button class="confirm-button send-button"  @click="modifyArticle()">SEND</button>        
+        <textarea name="text-input" id="comment-text-area" cols="40" rows="20" v-model="body"></textarea>
+        <button class="confirm-button send-button signup-button"  @click="modifyArticle()">SEND</button>        
     </div>
 </template>
 
@@ -53,6 +53,10 @@ const axios= require ('axios');
 
 <style>
 
+    #comment-text-area{
+        margin-left: 10%;
+        border: none;
+    }
     .send-button{
         margin-top: 25%
     }

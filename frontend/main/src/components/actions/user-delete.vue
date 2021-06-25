@@ -1,17 +1,19 @@
 <template>
     <div>
-        <p>Etes vous sûr de vouloir<br> supprimer votre compte ?</p>
-        <div class="input">
-            <div class="input">
+        <p>Etes vous sûr de vouloir supprimer votre compte ?</p>
+        <div>
+
+            <div class="input-login">
                 <label for="mail"></label>
-                <input type="email" class="email" name="email" placeholder="e-mail" v-model="email">
+                <input class="input-login" type="email"  name="email" placeholder="e-mail" v-model="email">
             </div>
                 
-            <div class="input">
+            <div class="input-login">
                 <label for="name"></label>
-                <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
+                <input class="input-login" type="text"  name="password" placeholder="mot de passe" v-model="password">
             </div>
-            <button id="signup-button" v-if="this.email && this.password"  @click="suppr()">SUPPRIMER</button>
+
+            <button class="signup-button login-button delete-button" v-if="this.email && this.password"  @click="suppr()">SUPPRIMER</button>
         </div>
     </div>
 </template>
@@ -66,3 +68,13 @@ export default {
     }
 }
 </script>
+
+<style>
+
+    .delete-button{
+        position: relative;
+    }
+
+    
+
+</style>
