@@ -1,27 +1,33 @@
 <template>
     <div>
-        <div class="input">
-                    <label for="name"></label>
-                    <input id="last-name" type="text" name="lastName" placeholder="Nom" v-model="lastName">
-                </div>
-                <div class="input">
-                    <label for="name"></label>
-                    <input type="text" id="first-name" name="firstName" placeholder="Prenom" v-model="firstName">
-                </div>
-                <div class="input">
-                    <label for="mail"></label>
-                    <input type="email" class="email" name="email" placeholder="e-mail" v-model="email">
-                </div>
-                <div class="input">
-                    <label for="name"></label>
-                    <input type="text" id="pseudo" name="pseudo" placeholder="pseudo" v-model="pseudo">
-                </div>
-                <div class="input">
-                    <label for="name"></label>
-                    <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
-                </div>
-                <button id="signup-button" @click="modify()">MODIFIER</button>
-                <p id="email-message" v-if="emailMessage">email non disponible</p>
+        <div class="input-login">
+            <label for="name"></label>
+            <input class="input-login" id="last-name" type="text" name="lastName" placeholder="Nom" v-model="lastName">
+        </div>
+
+        <div class="input-login">
+            <label for="name"></label>
+            <input class="input-login" type="text" id="first-name" name="firstName" placeholder="Prenom" v-model="firstName">
+        </div>
+
+        <div class="input-login">
+            <label for="mail"></label>
+            <input class="input-login" type="email"  name="email" placeholder="e-mail" v-model="email">
+        </div>
+
+        <div class="input-login">
+            <label for="name"></label>
+            <input class="input-login" type="text" id="pseudo" name="pseudo" placeholder="pseudo" v-model="pseudo">
+        </div>
+
+        <div class="input-login">
+            <label for="name"></label>
+            <input class="input-login" type="text"  name="password" placeholder="mot de passe" v-model="password">
+        </div>
+
+        <button class="signup-button login-button" @click="modify()">MODIFIER</button>
+        <p id="email-message" v-if="emailMessage">email non disponible</p>
+
     </div>
 </template>
 

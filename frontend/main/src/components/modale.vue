@@ -4,7 +4,12 @@
         <div class="modale cart">
             <button @click="hideModale()"  class="button-close">X</button>
 
-            <div v-if="login">
+            <div v-if="displayMessage">
+                   <p class="message"> {{ message }}</p>
+                    <button class="confirm-button signup-button" @click="hideModale()">OK</button>
+            </div>
+
+            <div v-else-if="login">
                 <login
                     @isConnected="isConnected()"
                     @unauthorized="unauthorized()" 
@@ -29,11 +34,6 @@
                     @unauthorized="unauthorized()"
                     @authorized="authorized()">
                 </modifyArticle>
-            </div>
-            
-            <div v-else-if="displayMessage">
-                    {{ message }}
-                    <button class="confirm-button" @click="hideModale()">OK</button>
             </div>
 
             <div v-else-if="deleteArticle">
@@ -268,8 +268,16 @@ export default {
         padding: 2%;
     }
     .confirm-button{
-        position: absolute;
-        left: 40%;
-        top: 70%;
+        margin-left: 10%;
+        
+        /* position: absolute; */
+        /* left: 40%; */
+        /* top: 70%; */
+        /* width: 50%; */
+    }
+
+    .message{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: rgb(172, 110, 110);
     }
 </style>

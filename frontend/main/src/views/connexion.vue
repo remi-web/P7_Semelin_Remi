@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button @click="displayLogin()" class="login signup">Connexion</button>ou
-        <button @click="displaySignup()" class="signup login">Inscription</button>
+        <button @click="displayLogin()" class="login signup-button">Connexion</button>
+        <button @click="displaySignup()" class="signup-button signup">Inscription</button>
         <modale class="modale" 
             :reveal="reveal" 
             :login="login" 
@@ -58,13 +58,12 @@ export default {
 <style>
 
     .login{
-        margin-right: 10%;
-        opacity: 0.6;
         box-shadow: 1px 1px 10px -3px rgb(172, 110, 110);
-            font-size: 1.2em;
+        font-size: 1.2em;
     }
     .signup{
-        margin-left: 10%;
+        margin-left: 8%;
+        font-size: 1.2em;
         
     }
 

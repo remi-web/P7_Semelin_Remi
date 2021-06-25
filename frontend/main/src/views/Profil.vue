@@ -144,8 +144,10 @@ export default {
     justify-content: center;
     margin-top: 5%;
     margin-bottom: 5%;
+    margin-right: 2%;
+    margin-left: 2%;
     padding: 2%;
-    font-size: 1em;
+    font-size: 0.9em;
   }
   .attribute{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

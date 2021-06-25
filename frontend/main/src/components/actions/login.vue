@@ -1,20 +1,23 @@
 <template>
-    <div id="form-login">
-        <form action="login" method="post">
-            <div id="inputs">
-                <div>
-                    <label for="mail"></label>
-                    <input type="email" class="email" name="email" placeholder="email" v-model="email">
-                </div>        
-                <div>
-                    <label for="name"></label>
-                    <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
+    <div id="formSignup">
+        
+            <main class="form">
+                <form action="login" method="post">
+
+                <div class="input-login">
+                    <label  for="mail"></label>
+                    <input class="input-login" type="email"  name="email" placeholder="email" v-model="email">
+                </div> 
+
+                <div class="input-login">
+                    <label  for="name"></label>
+                    <input class="input-login" type="text"  name="password" placeholder="mot de passe" v-model="password">
                 </div>
-                
-            </div>
-        </form>
+            </form>
+        </main>
+        
         <div v-if="loginButton">
-            <button  class="login-button" @click.stop="login()">LOGIN</button>
+            <button  class="signup-button login-button" @click.stop="login()">LOGIN</button>
         </div>
         
         
@@ -82,8 +85,21 @@ export default {
 
 <style>
 
+    
+
+    .input-login{
+        padding: 2%;
+        width: 90%;
+        margin-bottom: 6%;
+        height: 30px;
+        border: none;
+        border-radius: 8px;
+        margin-right: 90px;
+        margin-left: 10px;
+    }
     .login-button{
-        width: 100%;
+        margin-left: 8%;
+        margin-right: 8%;
     }
 
 </style>

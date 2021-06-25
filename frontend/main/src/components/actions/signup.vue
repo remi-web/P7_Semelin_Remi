@@ -1,30 +1,37 @@
 <template>
     <div id="formSignup">
-        <form id="form" >
-        <main>
+        <form>
+        <main class="form">
+
+            <div id="text-infos">
+                <p id="veuillez">Veuillez renseigner le formulaire</p><br>
+                <p id="password-infos">le mot de passe doit contenir au moins 8 caractères, 1 majuscule et 1 chiffre</p>
+            </div>
+
                 <div class="input">
                     <label for="name"></label>
-                    <input id="last-name" type="text" name="lastName" placeholder="Nom" v-model="lastName">
+                    <input class="input" id="lastName" type="text" name="lastName" placeholder="Nom" v-model="lastName">
                 </div>
+
                 <div class="input">
                     <label for="name"></label>
-                    <input type="text" id="first-name" name="firstName" placeholder="Prenom" v-model="firstName">
+                    <input class="input" type="text" name="firstName" placeholder="Prenom" v-model="firstName">
                 </div>
                 <div class="input">
                     <label for="mail"></label>
-                    <input type="email" class="email" name="email"  placeholder="e-mail" v-model="email" required>
+                    <input class="input" type="email" name="email"  placeholder="e-mail" v-model="email" required>
                 </div>
                 <div class="input">
                     <label for="name"></label>
-                    <input type="text" id="pseudo" name="pseudo" placeholder="pseudo" v-model="pseudo">
+                    <input class="input" type="text" name="pseudo" placeholder="pseudo" v-model="pseudo">
                 </div>
                 <div class="input">
                     <label for="name"></label>
-                    <input type="text" class="password" name="password" placeholder="mot de passe" v-model="password">
+                    <input class="input" type="text" name="password" placeholder="mot de passe" v-model="password">
                 </div>
                 
-                <button id="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
-                <p id="email-message" v-if="emailMessage">email invalide ou dejà enregistré</p>
+                <button class="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
+                <p id="email-message" v-if="emailMessage">email invalide, dejà enregistré ou mot de passe trop faible</p>
         </main>
 
         </form>
@@ -88,26 +95,49 @@ export default {
 
 <style>
 
-
-    #formSignup {
-        width: 50%;
-        margin-bottom: 10%;
-        margin-top: 10%;
+    .form{
         display: flex;
-        justify-content: center;
-        
-        
-    };
-    main .input #last-name{
-            margin: 5%;
+        flex-direction: column;
+        align-items: center;
     }
-
-    main{
-        margin-bottom: 10%;
+   
+    .signup-button{
+        margin-top: 5%;
+        width: 84%;
+        box-shadow: 1px 1px 10px -3px gray;
+        background: rgba(250, 43, 43, 0.116);
+        border-radius: 8px;
+        color: rgba(10, 8, 114, 0.521);
+        border: none;
+        padding: 4%;
     }
-    #signup-button{
-        margin: 5%;
-        width: 100%;
+    .input{
+        padding: 2%;
+        width: 90%;
+        margin-bottom: 6%;
+        height: 30px;
+        border: none;
+        border-radius: 8px;
+        margin-left: 2%;
+    
+    
     }
+    #text-infos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #password-infos{
+        margin-left: 50px;
+        margin-right: 50px;
+        text-align: center;
+    }
+    #veuillez{
+        color: rgba(10, 8, 114, 0.623);
+        font-size: 1.2em;
+    }
+   
+    
+   
 
 </style>

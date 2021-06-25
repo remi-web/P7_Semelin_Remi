@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require ('bcrypt');
 
 const validator = require("email-validator")
-const inputValidate = require('../models/password-validator')
+const inputValidate = require('../models/model-password/password-validator')
 const passwordValidate = inputValidate.passWordValidator
 
 exports.signup = async (req, res, next) => {
 
-    let passwordValidate = passwordValidate.validate(req.body.password)
+    let passwordIsOk = passwordValidate.validate(req.body.password)
     let emailValidate = validator.validate(req.body.email)
 
-    if ((emailValidate)  &&  (passwordValidate === true)){
+    if ((emailValidate)  &&  (passwordIsOk === true)){
         bcrypt
             .hash(req.body.password, 10)
             .then((hash) => {
