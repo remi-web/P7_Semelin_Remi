@@ -25,7 +25,7 @@
           <p class="name" >pseudo</p><li class="attribute">{{ pseudo }}</li>
       </ul>
 
-      <div class="mes-infos">
+      <div id="bloc-logout">
           <button class="button-logout" @click="displayLogout()">se déconnecter</button>
       </div>
 
@@ -127,10 +127,13 @@ export default {
     flex-direction: column;
     align-items: center;
   } 
+  #bloc-logout{
+    display: flex;
+    justify-content: center;
+  }
   .button-logout{
-    /* margin-left: 30%; */
     padding: 4%;
-    margin-top: 20%;
+    margin-top: 10%;
     background: rgba(250, 43, 43, 0.116);
     border: none;
     border-radius: 8px;
@@ -154,17 +157,28 @@ export default {
     display: flex;
     justify-content: center;
     border: none;
-    /* border-radius: 8px; */
-    width: 70%;
     margin-bottom: 3%;
     padding: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
     box-shadow: -1px 0px 4px 0px gray;
-    /* background: rgba(248, 2, 2, 0.089); */
 
   }
   .name{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color:rgb(94, 93, 93);
   }
+
+  @media (min-width: 600px){
+    .mes-infos{
+      justify-content: space-between;
+    }
+
+    #bloc-logout{
+      display: flex;
+      justify-content: center;
+    }
+  }
+
 
 </style>

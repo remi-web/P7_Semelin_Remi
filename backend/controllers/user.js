@@ -67,15 +67,6 @@ exports.findOne = (req, res, next) =>{
             // if(!user){
                  res.status(200).json({ user});
             }) 
-            /*
-            bcrypt.compare(req.body.password, user.password)
-                .then(valid => {
-                    if(!valid) {
-                        return res.status(401).json({ error: 'Mot de passe incorrect !'})
-                    }
-                    res.status(200).json({ user })
-                })
-                */
              
         .catch( error => res.status(400).json({ message: "err req findOne" }))
 }
@@ -96,7 +87,15 @@ exports.modify = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    db.User.destroy({ where:{ id: req.params.id }})
+    db.Article.destroy({
+        where:{ userId: req.params.id },
+        include:[ { model: db.users, attributes: [ 'id']}]
+    })
+   
+    db.User.destroy({ 
+        where:{ id: req.params.id },
+        include: [ {model: db.articles, attributes: [ 'id ']}]
+    })
         .then(() => res.status(200).json({ message: " utilisateur supprimé"}))
         .catch(err => res.status(404).json({message: "erreur suppression"}))        
 }

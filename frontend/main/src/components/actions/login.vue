@@ -1,29 +1,28 @@
 <template>
+
     <div id="formSignup">
-        
             <main class="form">
                 <form action="login" method="post">
 
-                <div class="input-login">
-                    <label  for="mail"></label>
-                    <input class="input-login" type="email"  name="email" placeholder="email" v-model="email">
-                </div> 
+                    <div class="input-login">
+                        <label  for="mail"></label>
+                        <input class="input-login" type="email"  name="email" placeholder="email" v-model="email">
+                    </div> 
 
-                <div class="input-login">
-                    <label  for="name"></label>
-                    <input class="input-login" type="text"  name="password" placeholder="mot de passe" v-model="password">
-                </div>
-            </form>
-        </main>
+                    <div class="input-login">
+                        <label  for="name"></label>
+                        <input class="input-login" type="password"  name="password" placeholder="mot de passe" v-model="password">
+                    </div>
+                </form>
+            </main>
         
         <div v-if="loginButton">
             <button  class="signup-button login-button" @click.stop="login()">LOGIN</button>
-        </div>
-        
-        
+        </div>        
     </div>
     
 </template>
+
 <script>
 
 const axios = require ('axios');
@@ -71,21 +70,14 @@ export default {
             .catch(() => {
                 console.log("erreur identifiant")
                 this.$emit('unauthorized')
-
             })
         },
-        /*
-        hideModale(){
-            this.$emit('unreveal')
-        }
-        */
     }
 }
+
 </script>
 
 <style>
-
-    
 
     .input-login{
         padding: 2%;

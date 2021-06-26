@@ -27,7 +27,7 @@
                 </div>
                 <div class="input">
                     <label for="name"></label>
-                    <input class="input" type="text" name="password" placeholder="mot de passe" v-model="password">
+                    <input class="input" type="password" name="password" placeholder="mot de passe" v-model="password">
                 </div>
                 
                 <button class="signup-button" @click.prevent.stop="signup()">SIGNUP</button>
@@ -136,8 +136,5 @@ export default {
         color: rgba(10, 8, 114, 0.623);
         font-size: 1.2em;
     }
-   
-    
-   
 
 </style>

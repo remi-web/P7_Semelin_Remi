@@ -1,4 +1,5 @@
 <template>
+
     <div class="reactions-types-bloc">
         <reactionsTypes
             v-for="reactionType in reactionsTypes" :key="reactionType.id"
@@ -7,6 +8,7 @@
             @addedReaction="addedReaction">
         </reactionsTypes>
     </div>
+
 </template>
 
 <script>
@@ -43,13 +45,13 @@ export default {
                 },
             })
             .then((response) => {
-                console.log(response)
-                this.$emit('addedReaction', {
+                    this.$emit('addedReaction', {
                     reaction: response.data.reactions
                 })
             })
         }
     },
+
     beforeMount(){
         axios.get('http://localhost:3000/api/articles/'+this.articleId+'/reactionsTypes', {
             headers: {
@@ -58,7 +60,6 @@ export default {
             })
             .then((response) => {
                 this.reactionsTypes = response.data.reactionsTypes
-                console.log(this.reactionsTypes)
             })
         }
 }
@@ -72,8 +73,5 @@ export default {
         justify-content: space-around;
         word-wrap: none;
     }
- 
-    
-  
 
 </style>

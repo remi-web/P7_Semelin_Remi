@@ -85,12 +85,7 @@ exports.delete = async (req, res, next) => {
     })
     .then(article => {
         article.destroy()
-        /*
-        sequelize.query(`
-            DELETE articles FROM articles
-            WHERE articles.id = ${req.params.id}`
-        )
-        */        
+            
         if( article.imageUrl != null){
             const filename = article.imageUrl.split('/images/')[1]
             console.log(filename)

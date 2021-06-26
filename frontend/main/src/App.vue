@@ -51,12 +51,14 @@ export default {
 </script>
 
 <style>
+
  
     #icon{
       position: absolute;
       left: 0;
       z-index: -1;
       opacity: 0.8;
+      margin-top: 10%
     }
   
     .baner-txt{
@@ -97,6 +99,16 @@ export default {
       font-size: 1.8em;
       color: rgb(172, 110, 110);
     }
+
+@media (min-width: 800px){
+
+  #app{
+    margin-left: 20%;
+    margin-right: 20%
+  }
+
+
+}
    
 </style>
 

@@ -3,9 +3,7 @@
        <button class="signup-button add-article-button" @click="articleTextArea()">Publier un article</button>
 
        <template v-if="addArticle">
-            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="8" v-model="body">
-                
-            </textarea>
+            <textarea class="text-area" name="text-input" id="post-text-area" cols="30" rows="8" v-model="body"></textarea>
             <input class="file-insert-button button" type="file"  name="image" ref="image" accept="image/png, image/jpeg" v-on:change="value()">
             <button class="send-article-button" @click="sendArticle(); articleTextArea()">SEND</button>
        </template>
@@ -54,16 +52,13 @@ const axios= require ('axios');
                     }
                 })
                 .then((res) => {
-                    console.log(formData);
                     this.$emit('added',{
                         article: res.data.article[0]
                     });
-                    console.log(res);
                 })
             },
             value(){
                 this.image = this.$refs.image.files[0];
-                console.log(this.$refs.image.files[0])
             }
         }
     }

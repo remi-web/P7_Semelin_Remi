@@ -1,12 +1,15 @@
 
 <template>
+
    <div>
        <p>Etes vous sûr de vouloir supprimer ce commentaire ?</p>
        <button  id="button-delete-comment" @click="deleteComment()">DELETE</button>
    </div>
+
 </template>
 
 <script>
+
 const axios= require ('axios');
 
     export default {
@@ -41,16 +44,6 @@ const axios= require ('axios');
                 })
             }
         },
-    /*
-        computed:{
-            auth(){
-                if(localStorage.userId == this.userId){
-                    return true
-                }
-                return false
-            }
-        }
-        */
     }
 
 </script>

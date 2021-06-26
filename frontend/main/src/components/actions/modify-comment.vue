@@ -16,7 +16,6 @@ const axios= require ('axios');
 
         data:() => ({
             note:"",
-            // userId: parseInt(localStorage.getItem('userId')),
             modifyCommentTextArea: false,
             revealScrollMenu: false,
             
@@ -65,7 +64,9 @@ const axios= require ('axios');
 </script>
 
 <style>
+
     .send-comment-button{
         margin-top: 5%;
     }
+
 </style>

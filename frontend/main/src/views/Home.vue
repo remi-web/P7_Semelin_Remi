@@ -54,6 +54,7 @@ export default {
                 .then((response) => {
                     console.log(response)
                     this.articles = response.data.articles;
+                    this.$emit('displayAllText')
                 })
         },
         add(payload){
@@ -62,6 +63,7 @@ export default {
             this.getArticles()
         },
     },
+    
     beforeMount(){
         if(localStorage.token){
             this.reveal = false

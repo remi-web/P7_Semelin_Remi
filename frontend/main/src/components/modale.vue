@@ -229,6 +229,7 @@ export default {
 
     
     .bloc-modale{
+        /* max-width: 93%; */
         position: fixed;
         top: 0%;
         bottom: 0%;
@@ -237,7 +238,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 1;
+        /* z-index: 1; */
     }
 
     .overlay{

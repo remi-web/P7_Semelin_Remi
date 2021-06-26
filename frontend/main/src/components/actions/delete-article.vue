@@ -1,17 +1,19 @@
 <template>
+
    <div>
-            <p class="text-infos">Etes vous sûr de vouloir supprimer cet article ?</p>
-            <button class="confirm-button signup-button"  @click="deleteArticle()">DELETE</button>
+        <p class="text-infos">Etes vous sûr de vouloir supprimer cet article ?</p>
+        <button class="confirm-button signup-button"  @click="deleteArticle()">DELETE</button>
        
    </div>
+
 </template>
 
 <script>
+
 const axios= require ('axios');
 
     export default {
         name: "deleteArticle",
-
         
         props: {
             id:{

@@ -131,7 +131,6 @@ import modale from '../components/modale'
            
             scrollMenu(){
                 this.revealScrollMenu = !this.revealScrollMenu
-                console.log(this.bodyLenght)
             },
            
             displayModaleModify(){
@@ -165,7 +164,6 @@ import modale from '../components/modale'
 
             addComment(payload){
                 this.comments.push(payload.comment)
-                console.log(this.id)
                 this.getComments()
                 this.countComments++
             },
@@ -186,7 +184,8 @@ import modale from '../components/modale'
                 this.displayComments = !this.displayComments
             },
 
-            getReactions(){                axios.get('http://localhost:3000/api/articles/'+this.id+'/reactions', {
+            getReactions(){
+                axios.get('http://localhost:3000/api/articles/'+this.id+'/reactions', {
             
                     headers: {
                         'authorization': 'bearer ' + localStorage.getItem('token')
@@ -194,7 +193,6 @@ import modale from '../components/modale'
                 })
                 .then((response) => {
                     this.reactions = response.data.reactions;
-                    console.log(this.reactions)
                     
                 })
             },
@@ -205,7 +203,6 @@ import modale from '../components/modale'
 
             addedReaction(payload){
                 this.reactions.push(payload.reaction)
-                console.log(this.id)
                 this.getReactions()
                 this.countReactions++
             },
@@ -237,7 +234,6 @@ import modale from '../components/modale'
 
              if(this.bodyLength > 180){
                 this.textArticleIsLong = true
-                console.log(this.bodyLength)
             }
         }
 
@@ -275,20 +271,16 @@ import modale from '../components/modale'
 
     .modify{
         background: rgba(255, 151, 151, 0.788);
-        font-size: 1.3em;
-        margin-right: 10px;
+        font-size: 1.1em;
+        width: initial;
+        padding-right: 4%;
+        /* margin-right: 10px; */
     }
     
     .button:hover{
         background: rgb(252, 185, 185);
     }
-    /*
-    .button{
-        border: none;
-        opacity: 80%;
-    }
-    
-*/
+
     .comments-button{
         border: none;
         background: white;
@@ -313,13 +305,13 @@ import modale from '../components/modale'
     }
     
     .textHidden{
-        height: 130px;
+        height: 200px;
         overflow-y:hidden;
         text-overflow: ellipsis;
         word-break: break-word;
         margin-top: 0;
         margin-bottom: 0;
-        /* white-space:nowrap; */
+        white-space:normal
 
     }
     .allText{
