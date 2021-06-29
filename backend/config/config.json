@@ -1,3 +1,5 @@
+
+
 {
   "development": {
     "username": "root",
@@ -14,9 +16,9 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "remi-web",
+    "password": "rocco6996",
+    "database": "familybook",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

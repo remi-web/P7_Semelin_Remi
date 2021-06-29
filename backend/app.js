@@ -12,9 +12,7 @@ require ('dotenv').config();
 
 const helmet = require("helmet")
 
-// const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
-// const db = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
@@ -25,17 +23,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-const sequelize = new Sequelize("Groupomania", "root", "remix4226", {
+const sequelize = new Sequelize(`${process.env.DB_DATABASE}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
   dialect: "mysql",
-  host: "localhost"
+  host: `${process.env.DB_HOST}`
 });
 
-/*
-const sequelize = new Sequelize(`${process.env.DB_DATABASE}, ${process.env.DB_USER}, ${process.env.DB_PASSWORD}`, {
-  dialect: "mysql",
-  host: "localhost"
-});
-*/
 try {
   sequelize.authenticate();
   console.log('Connecté à la base de données MySQL!');
