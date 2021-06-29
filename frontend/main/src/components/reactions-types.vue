@@ -74,7 +74,7 @@
         border: solid 1px rgb(42, 31, 145);
         border-radius: 4px;
         padding-right: 8px;
-        padding-left: 8px;        
+        padding-left: 8px;
     }
     
     .content{

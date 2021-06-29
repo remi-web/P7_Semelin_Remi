@@ -36,20 +36,18 @@ const axios= require ('axios');
             },
             
             sendArticle(){
+                console.log(this.image)
                 const formData = new FormData();
-                if (this.image !== null) {
-                    formData.append("image", this.image);
-                    formData.append("body", this.body);        
-                } else
-                {
-                    formData.append("body", this.body);
-                    formData.append("image", this.empty)
-                }    
+                
+                formData.append("image", this.image);
+                formData.append("body", this.body);        
+                   
                 axios.post('http://localhost:3000/api/articles', formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
+                    
                 })
                 .then((res) => {
                     this.$emit('added',{

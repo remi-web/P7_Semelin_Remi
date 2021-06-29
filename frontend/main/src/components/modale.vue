@@ -6,7 +6,7 @@
 
             <div v-if="displayMessage">
                    <p class="message"> {{ message }}</p>
-                    <button class="confirm-button signup-button" @click="hideModale()">OK</button>
+                    <button class="confirm-button signup-button" @click="hideModale(); getArticles()">OK</button>
             </div>
 
             <div v-else-if="login">
@@ -173,6 +173,7 @@ export default {
             this.$emit('unreveal')
             this.$emit('undisplay')
             this.displayMessage = false
+           
         },
        
         unauthorized(){
@@ -184,7 +185,7 @@ export default {
         authorized(){
             this.$emit('undisplay')
             this.displayMessage = true
-            this.$emit('getArticles')
+            
             this.$emit('getComments')
 
             if(this.modifyArticle){
@@ -205,6 +206,10 @@ export default {
             else if(this.userSuppr){
                 this.message = "votre compte a été supprimé"
             }            
+        },
+
+        getArticles(){
+            this.$emit('getArticles')
         },
         
         reload(){
@@ -254,7 +259,7 @@ export default {
     .modale{
         background: #f1f1f1;
         color: #333;
-        padding: 10%;
+        padding: 4%;
         position: fixed;
         border-radius: 8px;
 
@@ -270,12 +275,7 @@ export default {
         padding: 2%;
     }
     .confirm-button{
-        margin-left: 10%;
-        
-        /* position: absolute; */
-        /* left: 40%; */
-        /* top: 70%; */
-        /* width: 50%; */
+        margin-left: 20%;
     }
 
     .message{

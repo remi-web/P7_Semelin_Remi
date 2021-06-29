@@ -70,8 +70,9 @@ export default {
 
     .reactions-types-bloc{
         display: flex;
-        justify-content: space-around;
-        word-wrap: none;
+        justify-content: flex-end;
+        
+        
     }
 
 </style>

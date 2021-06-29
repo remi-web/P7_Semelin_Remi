@@ -103,7 +103,7 @@ export default {
    
     .signup-button{
         margin-top: 5%;
-        width: 84%;
+        width: 55%;
         box-shadow: 1px 1px 10px -3px gray;
         background: rgba(250, 43, 43, 0.116);
         border-radius: 8px;
@@ -113,12 +113,12 @@ export default {
     }
     .input{
         padding: 2%;
-        width: 90%;
+        width: 70%;
         margin-bottom: 6%;
         height: 30px;
         border: none;
         border-radius: 8px;
-        margin-left: 2%;
+        margin-left: 7%;
     
     
     }
@@ -135,6 +135,9 @@ export default {
     #veuillez{
         color: rgba(10, 8, 114, 0.623);
         font-size: 1.2em;
+    }
+    #email-message{
+        color: red;
     }
 
 </style>

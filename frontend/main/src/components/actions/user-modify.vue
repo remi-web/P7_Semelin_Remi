@@ -25,7 +25,7 @@
             <input class="input-login" type="text"  name="password" placeholder="mot de passe" v-model="password">
         </div>
 
-        <button class="signup-button login-button" @click="modify()">MODIFIER</button>
+        <button class="signup-button login-button modify-button" @click="modify()">MODIFIER</button>
         <p id="email-message" v-if="emailMessage">email non disponible</p>
 
     </div>
@@ -84,3 +84,11 @@ export default {
     }
 }
 </script>
+
+<style>
+
+    .modify-button{
+        margin-left: 20%;
+    }
+
+</style>

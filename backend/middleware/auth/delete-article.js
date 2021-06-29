@@ -1,9 +1,6 @@
 const db = require("../../models/index");
 const jwt = require('jsonwebtoken');
-// const user = require("../../models/user");
-// const role = require("../../models/role");
 
-// const authUserComment = require('./modify-comment')
 
 
 module.exports = async ( req, res, next) => {

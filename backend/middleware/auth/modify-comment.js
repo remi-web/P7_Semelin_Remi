@@ -15,7 +15,6 @@ module.exports = async ( req, res, next) => {
             // include: [{ model: db.users }]
         })
             .then(comment => {
-                console.log(comment)
                 if (comment[0].userId != userId) {   
                     res.status(401).send({ error: 'Acces non authorisé' });
                 }

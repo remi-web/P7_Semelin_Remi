@@ -57,6 +57,7 @@ export default {
                         this.$emit('deleted')
                         
                         
+                        
                     })
             })                
             .catch(() => {

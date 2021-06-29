@@ -157,6 +157,7 @@ import modale from '../components/modale'
              //hide modifyArticle message   
             undisplay(){
                 this.modifyArticle = false
+                this.deleteArticle = false
             },
             getArticles(){
                 this.$emit('getArticles')
@@ -267,6 +268,7 @@ import modale from '../components/modale'
         left: 75%;
         display: flex;
         flex-direction: column;
+        width: 20%;
     }
 
     .modify{
@@ -274,7 +276,6 @@ import modale from '../components/modale'
         font-size: 1.1em;
         width: initial;
         padding-right: 4%;
-        /* margin-right: 10px; */
     }
     
     .button:hover{
@@ -305,12 +306,12 @@ import modale from '../components/modale'
     }
     
     .textHidden{
-        height: 200px;
+        max-height: 200px;
         overflow-y:hidden;
         text-overflow: ellipsis;
         word-break: break-word;
         margin-top: 0;
-        margin-bottom: 0;
+        margin-bottom: 5%;
         white-space:normal
 
     }
