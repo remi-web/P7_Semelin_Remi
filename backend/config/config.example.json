@@ -2,9 +2,9 @@
 
 {
   "development": {
-    "username": "root",
-    "password": "remix4226",
-    "database": "Groupomania",
+    "username": "username",
+    "password": "password",
+    "database": "database",
     "host": "localhost",
     "dialect": "mysql"
   },
@@ -17,9 +17,9 @@
   },
   "production": {
     "username": "remi-web",
-    "password": "rocco6996",
-    "database": "familybook",
-    "host": "127.0.0.1",
+    "password": "password",
+    "database": "databaser",
+    "host": "host",
     "dialect": "mysql"
   }
 }
